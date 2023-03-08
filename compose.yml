@@ -37,6 +37,23 @@ services:
       - database
     networks:
       - network
+  sae4app:
+    build:
+      args:
+        USER_ID: ${USER_ID:-0}
+        GROUP_ID: ${GROUP_ID:-0}
+        USER_NAME: ${USER_NAME:-0}
+        GROUP_NAME: ${GROUP_NAME:-0}
+      context: .
+      dockerfile: ./build/sae4app/Dockerfile
+    container_name: ${COMPOSE_PROJECT_NAME}-sae4app
+    volumes:
+      - ./sae4app:/app
+    command: sh -c 'npm install && npm start'
+    ports:
+      - 3000:3000
+    networks:
+      - network
   database:
     build:
       context: .
