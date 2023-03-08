@@ -46,7 +46,7 @@ De manière optionnelle, mais fortement recommandée :
 dans le groupe correspondant à votre équipe :  
 _Par exemple pour l'équipe 3 du groupe de TP X1, le groupe est :_ `SAE34-BUT-2022/x1/eq3`
 
-![img_fork.png](img_fork.png)
+<div align="center" ><img src="stack_sae4_img_fork.png" width=500/></div>
 
 **Remarque** : 
 >Il n'est pas nécessaire de conserver le lien avec le modèle de stack, vous pouvez donc aller dans  
