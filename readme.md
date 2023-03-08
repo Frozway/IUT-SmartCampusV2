@@ -140,8 +140,8 @@ npm install --save <nom-de-la-dépendance> # ou --save-dev pour une dépendance 
 │   │   ├── Dockerfile
 │   │   └── default.conf
 │   └── sae4api
-│       ├── Dockerfile
-│       └── default.ini
+│   │   ├── Dockerfile
+│   │   └── default.ini
 │   └── sae4app
 │       └── Dockerfile
 │       
