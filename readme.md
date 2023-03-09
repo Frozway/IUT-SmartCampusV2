@@ -83,7 +83,7 @@ Dans un terminal positionné dans le dossier de la stack du projet :
 ```bash
 docker compose exec sae4api bash
 ```
-- après connextion, on doit être dans `/app`, vérifier 
+- après connexion, on doit être dans `/app`, vérifier 
 ```
 pwd 
 ```
@@ -99,7 +99,24 @@ localhost:8000
 
 ## Initialiser le service React `sae4app`
 
-**À Faire**
+Un projet react, créé via Create-React-App par défaut est déjà disponible dans le dossier `sae4app` du dépôt.
+
+Si vous souhaitez ajouter des dépendances : 
+
+- on se connecte au conteneur associé su service `sae4app` 
+
+```bash
+docker compose exec sae4app bash
+```
+- après connexion, on doit être dans `/app`, vérifier 
+
+- installer les dépendances 
+
+```bash
+npm install --save <nom-de-la-dépendance> # ou --save-dev pour une dépendance de développement
+```
+
+- vérifier l'exécution du service `sae4app` : [http://localhost:3000](http://localhost:3000)
 
 ## Partager le projet
 
@@ -123,8 +140,11 @@ localhost:8000
 │   │   ├── Dockerfile
 │   │   └── default.conf
 │   └── sae4api
-│       ├── Dockerfile
-│       └── default.ini
+│   │   ├── Dockerfile
+│   │   └── default.ini
+│   └── sae4app
+│       └── Dockerfile
+│       
 └── compose.yml
 ```
 
