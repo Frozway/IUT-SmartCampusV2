@@ -50,6 +50,7 @@ services:
     volumes:
       - ./sae4app:/app
     command: sh -c 'npm install && npm start'
+    #command : sh -c " while true; do :; done "
     ports:
       - 3000:3000
     networks:
