@@ -65,6 +65,10 @@ Le membre de l'équipe qui a réalisé le fork, doit cloner ce nouveau dépôt s
 
 Dans un terminal positionné dans le dossier de la stack du projet : 
 
+- Créer le dossier de l'api 
+```
+mkdir sae4api
+```
 - démarrer la stack    
 ```
 docker compose up --build -d
