@@ -79,6 +79,14 @@ docker compose up --build -d
 docker compose ps
 ```
 
+**Remarque**.      
+Si vous avez un le message d'erreur : 
+```
+Error response from daemon: invalid mount config for type "bind": bind source path does not exist: /host_mnt/Users/jmalki/Documents/Enseignement/IUT/DUT/2022-2023/SAE4/stack-api-platform-react-mariadb-sae4-2023/sae4api
+```
+C'est que vous n'avez pas créer le dossier `sae4api`
+
+
 ## Initialiser le service Api-Platform `sae4api`
 
 Dans un terminal positionné dans le dossier de la stack du projet : 
