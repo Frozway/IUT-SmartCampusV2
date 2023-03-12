@@ -130,6 +130,9 @@ npm install --save <nom-de-la-dépendance> # ou --save-dev pour une dépendance 
 
 - vérifier l'exécution du service `sae4app` : [http://localhost:3000](http://localhost:3000)
 
+**Remarque**       
+Il se peut que le projet React `sae4app` ne démarre pas, dans ce cas contacter votre TonTon DEV. 
+
 ## Partager le projet
 
 À ce stade, les services `sae4api` et `sae4app` sont créés et démarrés, autrement dit fonctionnels, alors : 
