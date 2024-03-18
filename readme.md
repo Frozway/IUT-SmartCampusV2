@@ -105,7 +105,7 @@ composer install
 
 ## Initialiser le service React `sae4app`
 
-Un projet react, créé via Create-React-App par défaut est déjà disponible dans le dossier `sae4app` du dépôt.
+Un projet react, créé via Vite par défaut est déjà disponible dans le dossier `sae4app` du dépôt.
 
 Si vous souhaitez ajouter des dépendances : 
 
@@ -119,13 +119,13 @@ docker compose exec sae4app bash
 - installer les dépendances 
 
 ```bash
-npm install --save <nom-de-la-dépendance> # ou --save-dev pour une dépendance de développement
+yarn add <nom-de-la-dépendance> # pour une dépendance de développement
 ```
 
-- vérifier l'exécution du service `sae4app` : [http://localhost:3000](http://localhost:3000)
+- vérifier l'exécution du service `sae4app` : [http://localhost:5173](http://localhost:5173)
 
 **Remarque**       
-Il se peut que le projet React `sae4app` ne démarre pas, dans ce cas contacter votre TonTon DEV. 
+Si le projet React `sae4app` ne démarre pas, dans ce cas contacter votre Tonton DEV. 
 
 ## Partager le projet
 

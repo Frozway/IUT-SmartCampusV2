@@ -1,4 +1,4 @@
-FROM node:18.14
+FROM forge-registry.iut-larochelle.fr/node/iutlr-info-node-20-11
 
 # Login to container as root user
 USER root
@@ -28,5 +28,7 @@ RUN if [ ! -z ${USER_NAME} ] && [ ! -z ${GROUP_NAME} ] && [ ${USER_ID:-0} -ne 0 
 # Login to container as non-root user 
 USER ${USER_ID:-0}:${GROUP_ID:-0}
 
+EXPOSE 5173
+
 # RUN npm install
-# CMD [ "npm", "run", "start" ]
+# CMD [ "yarn", "dev" ]
