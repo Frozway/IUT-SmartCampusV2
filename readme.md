@@ -17,6 +17,7 @@
     - [database](#database)
     - [nginx](#nginx)
     - [sae4api](#sae4api)
+    - [sae4appp](#sae4appp)
 
 
 ## Prérequis
@@ -44,7 +45,7 @@ De manière optionnelle, mais fortement recommandée :
 
 **UN.E SEUL.E** des développeuses/développeurs de votre équipe va **fork** le présent dépôt, pour en créer un nouveau, 
 dans le groupe correspondant à votre équipe :  
-_Par exemple pour l'équipe 3 du groupe de TP X1, le groupe est :_ `SAE34-BUT-2022/x1/eq3`
+_Par exemple pour l'équipe 3 du groupe de TP X1, le groupe est :_ `2023-2024-BUT-INFO2-A-SAE34/K1/K11`
 
 <div align="center" ><img src="stack_sae4_img_fork.png" width=500/></div>
 
@@ -65,13 +66,9 @@ Le membre de l'équipe qui a réalisé le fork, doit cloner ce nouveau dépôt s
 
 Dans un terminal positionné dans le dossier de la stack du projet : 
 
-- Créer le dossier de l'api 
-```
-mkdir sae4api
-```
 - démarrer la stack    
 ```
-docker compose up --build -d
+docker compose up --build
 ```
 
 - inspecter l'état des services 
@@ -79,35 +76,32 @@ docker compose up --build -d
 docker compose ps
 ```
 
-**Remarque**                  
-Si vous avez  le message d'erreur : 
-```
-Error response from daemon: invalid mount config for type "bind": bind source path does not exist: /../../stack-api-platform-react-mariadb-sae4-2023/sae4api
-```
-C'est que vous n'avez pas créer le dossier `sae4api`
-
-
 ## Initialiser le service Api-Platform `sae4api`
 
-Dans un terminal positionné dans le dossier de la stack du projet : 
- 
- - on se connecte au conteneur associé su service `sae4api` 
+Un projet Api-Platform, créé via la commande : 
+```bash 
+composer create-project symfony/skeleton:"6.3.*" sfapi
+```
+est déjà disponible dans le dossier sae4api du dépôt.
+
+Si vous souhaitez ajouter des dépendances : 
+
+- on se connecte au conteneur associé su service `sae4api` 
+
 ```bash
 docker compose exec sae4api bash
 ```
 - après connexion, on doit être dans `/app`, vérifier 
-```
-pwd 
-```
-- créer le projet `sae4api`
-```
-composer create-project symfony/skeleton:"^5.4" sae4api
+
+- installer les dépendances 
+
+```bash
+cd /app/sae4api 
+composer install
 ```
 
-- vérifier l'exécution du service `sae4api`
-```
-localhost:8000
-```
+- vérifier l'exécution du service `sae4api` : [http://localhost:8000](http://localhost:8000)
+
 
 ## Initialiser le service React `sae4app`
 
@@ -142,6 +136,7 @@ Il se peut que le projet React `sae4app` ne démarre pas, dans ce cas contacter 
   - cloner ce nouveau dépôt sur son poste de travail 
   - démarrer toute la stack docker du projet 
 
+
 ## Contenu de la docker stack 
 ```
 .
@@ -159,7 +154,8 @@ Il se peut que le projet React `sae4app` ne démarre pas, dans ce cas contacter 
 │   │   └── default.ini
 │   └── sae4app
 │       └── Dockerfile
-│       
+├── sae4api
+├── sae4app       
 └── compose.yml
 ```
 
@@ -207,48 +203,7 @@ RUN mkdir /app
 ```
 
 #### sae4api 
-On utilise un environement de développement basé sur `php-7.4-fpm`.    
-Cet environement contient un `composer` version 2.     
-L'image docker se trouve dans la registry de l'IUT.    
-Au démarrage du conteneur de cette image : 
-- on se met dans l'environement `dev` (pour Symfony)
-- on se loge en tant que `root` pour exécuter quelques commandes système
-- on surcharge quelques variables pour PHP et Symfony
-- on se positionne dans le dossier `/app` 
-- si on est sous LINUX, on crée l'utilisateur qui va exécuter le conteneur 
-- on se loge en tant que l'utilisateur créé, sinon c'est l'utilisateur `root` (dans le cas de Mac et Windows)
+Projet Api-Platform pour le backend 
 
-
-Le Dockerfile : 
-```
-FROM forge-registry.iut-larochelle.fr/php-fpm-composer/php7.4-fpm-composer
-
-# Login to container as root user
-USER root
-
-# Symfony dev environement 
-ENV APP_ENV=dev
-
-# Copy php default configuration
-COPY ./build/sae4api/default.ini /usr/local/etc/php/conf.d/default.ini
-
-# Set working directory
-WORKDIR /app 
-
-# Arguments defined in compose.yml
-ARG USER_NAME
-ARG USER_ID
-ARG GROUP_NAME
-ARG GROUP_ID
-
-# Create system user to run Composer and PHP Commands
-RUN if [ ! -z ${USER_NAME} ] && [ ! -z ${GROUP_NAME} ] && [ ${USER_ID:-0} -ne 0 ] && [ ${GROUP_ID:-0} -ne 0 ] ; then \
-    useradd -G www-data,root -u $USER_ID -d /home/$USER_NAME $USER_NAME && \
-    mkdir -p /home/$USER_NAME/.composer  && \
-    chown -Rf ${USER_NAME}:${GROUP_NAME} /home/$USER_NAME  && \
-    chown -R ${USER_NAME}:${GROUP_NAME} /app \
-    ; fi
-
-# Login to container as non-root user 
-USER ${USER_ID:-0}:${GROUP_ID:-0}
-```
+#### sae4appp
+Projet react pour le fontend 

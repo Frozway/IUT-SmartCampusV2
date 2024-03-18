@@ -1,4 +1,4 @@
-FROM forge-registry.iut-larochelle.fr/php-fpm-composer/php7.4-fpm-composer
+FROM forge-registry.iut-larochelle.fr/php-fpm-composer/iutlr-info-php8.2-fpm-composer2
 
 # Login to container as root user
 USER root
@@ -7,7 +7,7 @@ USER root
 ENV APP_ENV=dev
 
 # Copy php default configuration
-COPY ./build/sae4api/default.ini /usr/local/etc/php/conf.d/default.ini
+COPY ./build/sae4api/conf/default.ini /usr/local/etc/php/conf.d/default.ini
 
 # Set working directory
 WORKDIR /app 
