@@ -17,11 +17,14 @@ ARG USER_ID
 ARG GROUP_NAME
 ARG GROUP_ID
 
+RUN groupmod -g 1001 node \
+  && usermod -u 1001 -g 1001 node
+
 # Create system user to run npm commands
 RUN if [ ! -z ${USER_NAME} ] && [ ! -z ${GROUP_NAME} ] && [ ${USER_ID:-0} -ne 0 ] && [ ${GROUP_ID:-0} -ne 0 ] ; then \
-    # useradd -G www-data,root -u $USER_ID -d /home/$USER_NAME $USER_NAME && \
+    useradd -G www-data,root -u $USER_ID -d /home/$USER_NAME $USER_NAME && \
     # mkdir -p /home/$USER_NAME/.composer  && \
-    chown -Rf ${USER_NAME}:${GROUP_NAME} /home/$USER_NAME  && \
+    # chown -Rf ${USER_NAME}:${GROUP_NAME} /home/$USER_NAME  && \
     chown -R ${USER_NAME}:${GROUP_NAME} /app \
     ; fi
 
