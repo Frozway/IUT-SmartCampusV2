@@ -8,7 +8,7 @@ const RoomList = () => {
         <RoomItem key={index} room={roomData} />
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default RoomList;
+export default RoomList
