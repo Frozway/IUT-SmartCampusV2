@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom'
 
 const RoomItem = ({ room }) => {
         return (
-            <div className="room-item">
-                <Link to={`/room/${room.tag}`}><h3>{room.room}</h3></Link>
-            </div>
+            <Link to={`/room/${room.tag}`}>
+                <div className="p-4 m-2 rounded-lg shadow-lg border-s-green-dark border-l-8 drop-shadow-md">
+                    <h3>{room.room}</h3>
+                </div>
+            </Link>
         )
     }
 
