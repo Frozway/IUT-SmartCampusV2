@@ -1,0 +1,21 @@
+.header {
+    background-color: #00b894;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  
+  .title-container {
+    text-align: center;
+  }
+  
+  .title {
+    color: white;
+    margin: 0;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .header {
+      padding: 10px 10px; /* Réduire le rembourrage pour les écrans plus petits */
+    }
+  }
