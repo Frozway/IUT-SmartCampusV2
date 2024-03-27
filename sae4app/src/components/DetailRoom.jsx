@@ -32,7 +32,7 @@ const DetailRoom = () => {
         <Value value="70" type="hum" />
         <Value value="400" type="co2" />
 
-      <Advice adviceText="Pensez à ouvrir la fenêtre pour aérer la pièce" />        
+      <Advice adviceText="Pensez à ouvrir la fenêtre pour aérer la pièce" />         
 
         <div onClick={() => window.history.back()} className='p-2 my-2 rounded-lg bg-green-dark text-white text-center hover:bg-green-light'>
           <FontAwesomeIcon icon={faCaretLeft} />
