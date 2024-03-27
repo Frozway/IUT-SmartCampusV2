@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-const RoomItem = ({ room }) => {
+const RoomItem = (props) => {
     return (
-        <Link to={`/room/${room.tag}`}>
+        <Link to={`/room/${props.room.tag}`}>
             <div className="p-4 m-2 rounded-lg shadow-lg border-s-green-dark border-l-8 drop-shadow-md">
-                <h3>{room.room}</h3>
+                <h3>{props.room.room}</h3>
             </div>
         </Link>
     )
