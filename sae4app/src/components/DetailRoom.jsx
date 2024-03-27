@@ -7,6 +7,7 @@ import Value from './RoomValue';
 import Advice from './Advice';
 
 import data from './../datas/database.json'; // Importation des données JSON
+import { fetchRoomByName } from '../services/roomService';
 
 const DetailRoom = () => {
     const { tag } = useParams();
@@ -17,21 +18,16 @@ const DetailRoom = () => {
       "hum": null,
       "co2": null
     });
+      
+    // Convertir le tag en numéro entier
+    const tagNumber = parseInt(tag);
+  
+    // Recherche de la salle en fonction du tagNumber
+    const room = Object.values(data).find(room => parseInt(room.tag) === tagNumber);
 
     // Retreive data from the database
     useEffect(() => {
-      fetch(
-        "https://sae34.k8s.iut-larochelle.fr/api/captures/last?limit=12",
-        {
-            method: "GET",
-            headers: {
-                "dbname": "sae34bdk1eq3",
-                "username": "k1eq3",
-                "userpass": "wohtuh-nigzup-diwhE4"
-            }
-        }
-      )
-      .then(response => response.json())
+      fetchRoomByName(room.room)
       .then(jsonData => {
         console.log(jsonData)
         setValuesLoading(false)
@@ -55,12 +51,7 @@ const DetailRoom = () => {
         setValuesLoading(false)
       }) 
     }, [])
-  
-    // Convertir le tag en numéro entier
-    const tagNumber = parseInt(tag);
-  
-    // Recherche de la salle en fonction du tagNumber
-    const room = Object.values(data).find(room => parseInt(room.tag) === tagNumber);
+
   
     if (!room) {
       return <div>Pas de salle associée pour le tag : {tag}</div>;
@@ -69,7 +60,7 @@ const DetailRoom = () => {
     return (
       <div className='py-4 px-2'>
 
-        <p className="text-5xl font-bold text-gray-dark">D000</p>
+        <p className="text-5xl font-bold text-gray-dark">{room.room}</p>
         
         <div className='p-4 py-8 my-4 rounded-2xl bg-green-dark drop-shadow-md flex items-end text-white'>
           <span className='text-4xl font-bold'>7</span><span>/10</span>
