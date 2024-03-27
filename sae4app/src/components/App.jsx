@@ -1,10 +1,10 @@
 import './../styles/App.css'
-import RoomList from "./RoomList"
+import DepartmentList from './DepartmentList'
 
 const App = () => {
   return (
     <div>
-      <RoomList />
+      <DepartmentList />
     </div>
   )
 }
