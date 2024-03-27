@@ -1,7 +1,9 @@
-import React, { useState } from "react";
-import searchIcon from "./../assets/searchIcon.svg";
+import { useState } from "react";
+import PropTypes from 'prop-types'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
-const SearchBar = ({ onSearch }) => {
+const SearchBar = (props) => {
   const [searchInput, setSearchInput] = useState("");
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -12,30 +14,35 @@ const SearchBar = ({ onSearch }) => {
   const handleSearchInputChange = (e) => {
     const value = e.target.value;
     setSearchInput(value);
-    onSearch(value);
+    props.onSearch(value);
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
+    <div className="fixed bottom-0 z-50">
       {isExpanded ? (
-        <input
-          type="text"
-          placeholder="Recherche..."
-          value={searchInput}
-          onChange={handleSearchInputChange}
-          className="p-2 border border-gray-300 rounded focus:outline-none w-full"
-          style={{ width: "calc(100vw - 32px)" }}
-        />
+        <div className="w-screen flex justify-center strong-shadow bg-white p-4">
+          <input
+            type="text"
+            placeholder="Recherche..."
+            value={searchInput}
+            onChange={handleSearchInputChange}
+            className="p-2 border shadow-md rounded-lg focus:outline-none w-full"
+          />
+        </div>
       ) : (
         <div
-          className="w-16 h-16 flex justify-center items-center bg-gray-200 rounded-full cursor-pointer"
+          className="p-3 fixed bottom-4 right-4 flex justify-center items-center bg-green-dark text-white rounded-full cursor-pointer strong-shadow"
           onClick={toggleExpanded}
         >
-          <img src={searchIcon} alt="Search" className="w-6 h-6" />
+          <FontAwesomeIcon icon={faMagnifyingGlass} className="size-7"/>
         </div>
       )}
     </div>
   );
 };
+
+SearchBar.propTypes = {
+  onSearch: PropTypes.func
+}
 
 export default SearchBar;

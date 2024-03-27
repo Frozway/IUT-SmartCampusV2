@@ -1,14 +1,18 @@
-import React from "react";
+import PropTypes from 'prop-types'
 import RoomItem from "./RoomItem";
 
-const RoomList = ({ filteredRooms }) => {
+const RoomList = (props) => {
   return (
     <div className="room-list">
-      {filteredRooms.map((roomData, index) => (
+      {props.filteredRooms.map((roomData, index) => (
         <RoomItem key={index} room={roomData} />
       ))}
     </div>
-  );
-};
+  )
+}
+
+RoomList.propTypes = {
+  filteredRooms: PropTypes.array
+}
 
 export default RoomList;
