@@ -15,12 +15,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ApiResource(
     operations: [
         New Get(
-            normalizationContext: ['groups' => ['department:item:read']]
+            normalizationContext: ['groups' => ['department:read', 'department:item:read']]
         ),
         New GetCollection(
-            normalizationContext: ['groups' => ['department:all:read']]
+            normalizationContext: ['groups' => ['department:read', 'department:all:read']]
         )
-        ]
+    ],
+    normalizationContext: ['groups' => ['department:read']]
 )]
 class Department
 {
@@ -30,11 +31,11 @@ class Department
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['department:item:read', 'department:all:read'])]
+    #[Groups(['department:read'])]
     private ?string $name = null;
 
     #[ORM\Column]
-    #[Groups(['department:item:read', 'department:all:read'])]
+    #[Groups(['department:read'])]
     private ?int $nbrooms = null;
 
     #[ORM\OneToMany(targetEntity: Room::class, mappedBy: 'department')]
@@ -45,13 +46,13 @@ class Department
         $this->rooms = new ArrayCollection();
     }
 
-    #[Groups(['department:item:read', 'department:all:read'])]
+    #[Groups(['department:read'])]
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    #[Groups(['department:item:read', 'department:all:read'])]
+    #[Groups(['department:read'])]
     public function getName(): ?string
     {
         return $this->name;

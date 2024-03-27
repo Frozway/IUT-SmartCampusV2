@@ -14,12 +14,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     operations: [
         New Get(
-            normalizationContext: ['groups' => ['acquisitionSystem:item:read']]
+            normalizationContext: ['groups' => ['acquisitionSystem:read', 'acquisitionSystem:item:read']]
         ),
         New GetCollection(
-            normalizationContext: ['groups' => ['acquisitionSystem:all:read']]
+            normalizationContext: ['groups' => ['acquisitionSystem:read', 'acquisitionSystem:all:read']]
         )
-    ]
+    ],
+    normalizationContext: ['groups' => ['acquisitionSystem:read']]
 )]
 class AcquisitionSystem
 {
@@ -30,11 +31,11 @@ class AcquisitionSystem
 
     #[ORM\Column(length: 10)]
     #[Assert\Length(min: 7, max: 10)]
-    #[Groups(['acquisitionSystem:item:read', 'acquisitionSystem:all:read'])]
+    #[Groups(['acquisitionSystem:read'])]
     private ?string $name = null;
 
     #[ORM\Column]
-    #[Groups(['acquisitionSystem:item:read', 'acquisitionSystem:all:read'])]
+    #[Groups(['acquisitionSystem:read'])]
     private ?bool $isInstalled = null;
 
     #[ORM\OneToOne(mappedBy: 'acquisitionSystem', cascade: ['persist', 'remove'])]

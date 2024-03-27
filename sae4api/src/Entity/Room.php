@@ -16,7 +16,7 @@ use ApiPlatform\Metadata\GetCollection;
         New Get(),
         New GetCollection()
     ],
-    normalizationContext: ['groups' => ['room:read']],
+        normalizationContext: ['groups' => ['room:read']],
 )]
 class Room
 {
