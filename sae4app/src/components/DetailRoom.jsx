@@ -11,6 +11,7 @@ import data from './../datas/database.json'; // Importation des données JSON
 const DetailRoom = () => {
     const { tag } = useParams();
     const [valuesLoading, setValuesLoading] = useState(true)
+    const [apiError, setApiError] = useState(false)
     const [values, setValues] = useState({
       "temp": null,
       "hum": null,
@@ -20,8 +21,7 @@ const DetailRoom = () => {
     // Retreive data from the database
     useEffect(() => {
       fetch(
-        // "https://sae34.k8s.iut-larochelle.fr/api/captures/last?limit=12",
-        "aled",
+        "https://sae34.k8s.iut-larochelle.fr/api/captures/last?limit=12",
         {
             method: "GET",
             headers: {
@@ -36,7 +36,7 @@ const DetailRoom = () => {
         console.log(jsonData)
         setValuesLoading(false)
 
-        let _values = {
+        let roomValues = {
           "temp": null,
           "hum": null,
           "co2": null
@@ -44,11 +44,16 @@ const DetailRoom = () => {
 
         jsonData.forEach(element => {
           if (values[element.nom] == null) {
-            _values[element.nom] = parseInt(element.valeur)
+            roomValues[element.nom] = parseInt(element.valeur)
           }
         });
-        setValues(_values)
+        setValues(roomValues)
       })
+      .catch(error => {
+        console.log(`Une erreur est survenue: ${error}`)
+        setApiError(true)
+        setValuesLoading(false)
+      }) 
     }, [])
   
     // Convertir le tag en numéro entier
@@ -75,11 +80,16 @@ const DetailRoom = () => {
         valuesLoading ?
           <p className="p-4 rounded shadow-md">Loading...</p>
         :
-        <div>
-          <Value value={values.temp} type="temp" />
-          <Value value={values.hum} type="hum" />
-          <Value value={values.co2} type="co2" />
-        </div>
+          apiError ?
+            <div className='p-4 py-8 my-4 rounded-2xl bg-red-light drop-shadow-md flex items-end text-red-dark text-center'>
+              <p className='w-full'>Une erreur est survenue</p>
+            </div>
+            :
+            <div>
+              <Value value={values.temp} type="temp" />
+              <Value value={values.hum} type="hum" />
+              <Value value={values.co2} type="co2" />
+            </div>
         }
 
       <Advice adviceText="Pensez à ouvrir la fenêtre pour aérer la pièce" />         
