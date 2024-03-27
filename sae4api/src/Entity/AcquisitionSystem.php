@@ -93,7 +93,7 @@ class AcquisitionSystem
     }
 
     #[Groups(['acquisitionSystem:item:read'])]
-    public function getRoomsDetails(): array
+    public function getRoomDetails(): array
     {
         if ($this->room !== null) {
             return [
