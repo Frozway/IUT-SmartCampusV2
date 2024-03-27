@@ -1,14 +1,14 @@
-import RoomItem from './RoomItem'
-import data from './../datas/database.json'
+import React from "react";
+import RoomItem from "./RoomItem";
 
-const RoomList = () => {
+const RoomList = ({ filteredRooms }) => {
   return (
     <div className="room-list">
-      {Object.values(data).map((roomData, index) => (
+      {filteredRooms.map((roomData, index) => (
         <RoomItem key={index} room={roomData} />
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default RoomList
+export default RoomList;
