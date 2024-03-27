@@ -15,6 +15,7 @@ class AppFixtures extends Fixture
     {
         $department = new Department();
         $department->setName("Informatique");
+        $department->setNbrooms(0);
         $manager->persist($department);
 
         // Room D205
