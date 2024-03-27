@@ -5,9 +5,22 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\AcquisitionSystemRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AcquisitionSystemRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    operations: [
+        New Get(
+            normalizationContext: ['groups' => ['acquisitionSystem:item:read']]
+        ),
+        New GetCollection(
+            normalizationContext: ['groups' => ['acquisitionSystem:all:read']]
+        )
+    ]
+)]
 class AcquisitionSystem
 {
     #[ORM\Id]
@@ -16,9 +29,12 @@ class AcquisitionSystem
     private ?int $id = null;
 
     #[ORM\Column(length: 10)]
+    #[Assert\Length(min: 7, max: 10)]
+    #[Groups(['acquisitionSystem:item:read', 'acquisitionSystem:all:read'])]
     private ?string $name = null;
 
     #[ORM\Column]
+    #[Groups(['acquisitionSystem:item:read', 'acquisitionSystem:all:read'])]
     private ?bool $isInstalled = null;
 
     #[ORM\OneToOne(mappedBy: 'acquisitionSystem', cascade: ['persist', 'remove'])]
@@ -73,5 +89,25 @@ class AcquisitionSystem
         $this->room = $room;
 
         return $this;
+    }
+
+    #[Groups(['acquisitionSystem:item:read'])]
+    public function getRoomsDetails(): array
+    {
+        if ($this->room !== null) {
+            return [
+                'id' => $this->room->getId(),
+                'name' => $this->room->getName(),
+                'floor' => $this->room->getFloor(),
+                'department' => $this->room->getDepartment()->getName(),     
+            ];
+        }
+        return [];
+    }
+
+    #[Groups(['acquisitionSystem:all:read'])]
+    public function getRoomName(): string
+    {
+        return $this->room->getName();
     }
 }
