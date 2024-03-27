@@ -9,7 +9,7 @@ const Advice = (props) => {
             <FontAwesomeIcon icon={faCircleInfo} className='size-8 mx-2 mb-3' />
             <p className='mx-2'>{ props.adviceText }</p>
           </div>
-          <div className='bg-blue-dark rounded-lg py-2 px-4 text-white text-center hover:bg-blue-light'>
+          <div className='bg-blue-dark rounded-lg py-2 px-4 text-white text-center hover:bg-white hover:text-blue-dark'>
             <p>C&apos;est fait</p>
           </div>
         </div>
