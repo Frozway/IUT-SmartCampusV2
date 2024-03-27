@@ -1,4 +1,10 @@
 import { useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCaretLeft } from '@fortawesome/free-solid-svg-icons'
+
+import Value from './RoomValue';
+import Advice from './Advice';
+
 import data from './../datas/database.json'; // Importation des données JSON
 
 const DetailRoom = () => {
@@ -15,15 +21,23 @@ const DetailRoom = () => {
     }
   
     return (
-      <div className="detail-room">
-        <h2>Détails de la salle</h2>
-        <p>Team: {room.team}</p>
-        <p>Room: {room.room}</p>
-        <p>DB Name: {room.dbname}</p>
-        <p>Username: {room.username}</p>
-        <p>Tag: {room.tag}</p>
+      <div className='py-4 px-2 text-white'>
+        
+        <div className='p-4 py-8 my-4 rounded-2xl bg-green-dark drop-shadow-md flex items-end'>
+          <span className='text-4xl font-black'>7</span><span>/10</span>
+          <span className='ml-auto'>CONFORTABILITE</span>
+        </div>
 
-        <button onClick={() => window.history.back()}>Retour</button>
+        <Value value="19" type="temp" />
+        <Value value="70" type="hum" />
+        <Value value="400" type="co2" />
+
+      <Advice adviceText="Pensez à ouvrir la fenêtre pour aérer la pièce" />         
+
+        <div onClick={() => window.history.back()} className='p-2 my-2 rounded-lg bg-green-dark text-white text-center hover:bg-green-light'>
+          <FontAwesomeIcon icon={faCaretLeft} />
+          Retour
+        </div>
       </div>
     );
   };
