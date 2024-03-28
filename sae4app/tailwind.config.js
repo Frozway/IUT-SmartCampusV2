@@ -16,7 +16,7 @@ export default {
         'red-light': '#ff7675',
         'red-dark': '#d63031',
         'gray-light': '#636e72',
-        'greengray-dark': '#2d3436'
+        'gray-dark': '#2d3436'
       },
     },
   },
