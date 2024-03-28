@@ -30,7 +30,6 @@ const DetailRoom = () => {
         fetchRoomByTag(tagNumber).then(jsonData => {
             console.log(jsonData)
                 room = jsonData
-                console.log("caca");
                 fetchRoomByName(room.name)
                     .then(jsonData => {
                         console.log(jsonData)
@@ -43,7 +42,7 @@ const DetailRoom = () => {
                         }
 
                         jsonData.forEach(element => {
-                            if (values[element.nom] == null) {
+                            if (roomValues[element.nom] == null) {
                                 roomValues[element.nom] = parseInt(element.valeur)
                             }
                         });
