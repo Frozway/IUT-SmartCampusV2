@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react';
 import Value from './RoomValue';
 import Advice from './Advice';
 
-import data from './../datas/database.json'; // Importation des données JSON
-import { fetchRoomByName } from '../services/roomService';
+import data from './../services/database.json'; // Importation des données JSON
+import {fetchRoomByName, fetchRoomByTag} from '../services/roomService';
 
 const DetailRoom = () => {
     const { tag } = useParams();
@@ -23,44 +23,51 @@ const DetailRoom = () => {
     const tagNumber = parseInt(tag);
   
     // Recherche de la salle en fonction du tagNumber
-    const room = Object.values(data).find(room => parseInt(room.tag) === tagNumber);
+    var room;
 
     // Retreive data from the database
     useEffect(() => {
-      fetchRoomByName(room.room)
-      .then(jsonData => {
-        console.log(jsonData)
-        setValuesLoading(false)
+        fetchRoomByTag(tagNumber).then(jsonData => {
+            console.log(jsonData)
+                room = jsonData
+                console.log("caca");
+                fetchRoomByName(room.name)
+                    .then(jsonData => {
+                        console.log(jsonData)
+                        setValuesLoading(false)
 
-        let roomValues = {
-          "temp": null,
-          "hum": null,
-          "co2": null
-        }
+                        let roomValues = {
+                            "temp": null,
+                            "hum": null,
+                            "co2": null
+                        }
 
-        jsonData.forEach(element => {
-          if (values[element.nom] == null) {
-            roomValues[element.nom] = parseInt(element.valeur)
-          }
-        });
-        setValues(roomValues)
-      })
-      .catch(error => {
-        console.log(`Une erreur est survenue: ${error}`)
-        setApiError(true)
-        setValuesLoading(false)
-      }) 
+                        jsonData.forEach(element => {
+                            if (values[element.nom] == null) {
+                                roomValues[element.nom] = parseInt(element.valeur)
+                            }
+                        });
+                        setValues(roomValues)
+                    })
+                    .catch(error => {
+                        console.log(`Une erreur est survenue: ${error}`)
+                        setApiError(true)
+                        setValuesLoading(false)
+                    })
+            
+        })
+
     }, [])
 
   
-    if (!room) {
-      return <div>Pas de salle associée pour le tag : {tag}</div>;
-    }
+    // if (!room) {
+    //   return <div>Pas de salle associée pour le tag : {tag}</div>;
+    // }
   
     return (
       <div className='py-4 px-2'>
 
-        <p className="text-5xl font-bold text-gray-dark">{room.room}</p>
+        <p className="text-5xl font-bold text-gray-dark">{room ? room.room : ""}</p>
         
         <div className='p-4 py-8 my-4 rounded-2xl bg-green-dark drop-shadow-md flex items-end text-white'>
           <span className='text-4xl font-bold'>7</span><span>/10</span>

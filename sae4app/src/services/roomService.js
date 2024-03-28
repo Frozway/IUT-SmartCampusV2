@@ -16,6 +16,11 @@ export async function fetchRoomByName(roomName) {
     return data
 }
 
+export async function fetchRoomByTag(tag) {
+    const response = await fetch(`http://localhost:8000/api/rooms/${tag}`);
+    return response.json();
+}
+
 export async function fetchRooms() {
     const response = await fetch('http://localhost:8000/api/rooms?page=1');
     const data = await response.json();
