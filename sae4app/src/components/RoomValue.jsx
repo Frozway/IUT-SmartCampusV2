@@ -18,17 +18,28 @@ const Value = (props) => {
         icon = faSmog
     }
 
-    return (
-        <div className='p-4 my-2 rounded-2xl bg-green-dark drop-shadow-md flex items-end'>
-          <span className='text-4xl font-black'>{ props.value }</span><span>{ unit }</span>
-          <FontAwesomeIcon icon={icon} className='ml-auto size-10' />
-        </div>
-    )
+    if (props.value == null) {
+        // Error message
+        return (
+            <p className='p-4 my-2 rounded-2xl bg-gray-light text-gray-dark drop-shadow-md flex items-end text-center'>
+              Une erreur est survenue
+            </p>
+        )
+        
+    } else {
+        return (
+            <div className='p-4 my-2 rounded-2xl bg-green-dark text-white drop-shadow-md flex items-end'>
+              <span className='text-4xl font-bold'>{ props.value }</span><span>{ unit }</span>
+              <FontAwesomeIcon icon={icon} className='ml-auto size-10' />
+            </div>
+        )
+    }
+    
 }
 
 Value.propTypes = {
     type: PropTypes.string,
-    value: PropTypes.string,
+    value: PropTypes.number,
 }
 
 export default Value

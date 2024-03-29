@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import RoomList from "./RoomList";
 import SearchBar from "./SearchBar";
 import data from "./../datas/database.json";
-import "./../styles/App.css";
+import './../styles/App.css'
+import DepartmentList from './DepartmentList'
 
 const App = () => {
   const [filteredRooms, setFilteredRooms] = useState(Object.values(data));
@@ -17,7 +17,7 @@ const App = () => {
   return (
     <div>
       <SearchBar onSearch={handleSearch} />
-      <RoomList filteredRooms={filteredRooms} />
+      <DepartmentList />
     </div>
   );
 };

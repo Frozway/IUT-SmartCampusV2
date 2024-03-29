@@ -13,6 +13,29 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        $departmentGC = new Department();
+        $departmentGC->setName("Génie Civil");
+        $departmentGC->setNbrooms(0);
+        $manager->persist($departmentGC);
+
+        // Room F205
+        $asGC1 = new AcquisitionSystem();
+        $asGC1->setName('ESP-GC001');
+        $asGC1->setIsInstalled(1);
+        $asGC1->setRoom(null);
+
+        $roomGC1 = new Room();
+        $roomGC1->setName('F205');
+        $roomGC1->setFloor(2);
+        $roomGC1->setAcquisitionSystem($asGC1);
+        $roomGC1->setDepartment($departmentGC);
+        $manager->persist($roomGC1);
+
+        $asGC1->setRoom($roomGC1);
+        $manager->persist($asGC1);
+
+
+
         $department = new Department();
         $department->setName("Informatique");
         $department->setNbrooms(0);
