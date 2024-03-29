@@ -4,7 +4,7 @@ import { fetchRoomsByDepartment } from '../services/roomService'; // Importer le
 
 import PropTypes from 'prop-types';
 
-const RoomList = ({ departmentId }) => {
+const RoomList = (props) => {
     const [rooms, setRooms] = useState([]);
     const [isLoading, setIsLoading] = useState(true); // État pour suivre le chargement
     const [error, setError] = useState(null); // État pour suivre les erreurs
@@ -12,7 +12,7 @@ const RoomList = ({ departmentId }) => {
     useEffect(() => {
         async function fetchRoomsData() {
             try {
-                const roomsData = await fetchRoomsByDepartment(departmentId);
+                const roomsData = await fetchRoomsByDepartment(props.departmentId);
                 setRooms(roomsData);
                 setIsLoading(false); // Mettre isLoading à false une fois que les salles sont chargées
             } catch (error) {
@@ -23,7 +23,11 @@ const RoomList = ({ departmentId }) => {
         }
 
         fetchRoomsData();
-    }, [departmentId]); // Effectuer une nouvelle requête lorsque departmentId change
+    }, [props.departmentId]); // Effectuer une nouvelle requête lorsque departmentId change
+
+    const nameContainsSlug = (roomName, slug) => {
+      return roomName.toLowerCase().includes(slug.toLowerCase())
+    }
 
     if (isLoading) {
       return <div>Chargement en cours...</div>;
@@ -37,7 +41,7 @@ const RoomList = ({ departmentId }) => {
         <div className="room-list">
             {/* Mapper les données des chambres pour afficher chaque RoomItem une fois que les salles sont chargées */}
             {rooms.map((roomData, index) => (
-                roomData.room in props.filteredRooms ?
+                nameContainsSlug(roomData.name, props.roomSearch) || props.roomSearch == "" ?
                   <RoomItem key={index} room={roomData} />
                 :
                   null
@@ -47,8 +51,8 @@ const RoomList = ({ departmentId }) => {
 };
 
 RoomList.propTypes = {
-  departmentId: PropTypes.object.isRequired,
-  filteredRooms: PropTypes.array
+  departmentId: PropTypes.number.isRequired,
+  roomSearch: PropTypes.string
 };
 
 export default RoomList;
