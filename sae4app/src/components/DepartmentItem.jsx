@@ -20,13 +20,14 @@ const DepartmentItem = (props) => {
                 <h3 className="mr-4">{props.department.name}</h3>
                 <FontAwesomeIcon icon={showRooms ? faChevronUp : faChevronDown} className="text-blue-dark" />
             </div>
-            {showRooms && <RoomList departmentId={props.department.id} />}
+            {showRooms && <RoomList departmentId={props.department.id} roomSearch={props.roomSearch}/>}
         </div>
     )
 }
 
 DepartmentItem.propTypes = {
     department: PropTypes.object.isRequired,
+    roomSearch: PropTypes.string
 }
 
 export default DepartmentItem

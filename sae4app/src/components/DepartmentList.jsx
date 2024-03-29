@@ -1,10 +1,13 @@
 import {useState, useEffect} from 'react';
-import DepartmentItem from './DepartmentItem';
 import {fetchDepartments} from '../services/departmentService';
+
+import DepartmentItem from './DepartmentItem';
+import SearchBar from './SearchBar';
 
 const DepartmentList = () => {
     const [departments, setDepartments] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [roomSearch, setRoomSeach] = useState("");
 
     useEffect(() => {
         async function fetchDepartmentsData() {
@@ -16,6 +19,10 @@ const DepartmentList = () => {
         fetchDepartmentsData();
     }, []);
 
+    const handleSearch = (value) => {
+        setRoomSeach(value);
+    };
+
     return (
         <div className="department-list">
             {isLoading ? (
@@ -24,9 +31,10 @@ const DepartmentList = () => {
                 </div>
             ) : (
                 departments.map((departmentData, index) => (
-                    <DepartmentItem key={index} department={departmentData} />
+                    <DepartmentItem key={index} department={departmentData} roomSearch={roomSearch}/>
                 ))
             )}
+            <SearchBar onSearch={handleSearch} />
         </div>
     );
 }

@@ -4,9 +4,9 @@ import DepartmentList from './DepartmentList'
 const App = () => {
   return (
     <div>
-      <DepartmentList />
+      <DepartmentList/>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
