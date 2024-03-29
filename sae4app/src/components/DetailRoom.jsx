@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretLeft } from "@fortawesome/free-solid-svg-icons";
+import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
+
 import { useEffect, useState } from "react";
 
 import Value from "./RoomValue";
@@ -20,6 +21,7 @@ const DetailRoom = () => {
     co2: null,
   });
   const [tips, setTips] = useState([]);
+  const [currentTipIndex, setCurrentTipIndex] = useState(0);
 
   // Convertir le tag en numéro entier
   const tagNumber = parseInt(tag);
@@ -68,8 +70,18 @@ const DetailRoom = () => {
   //   return <div>Pas de salle associée pour le tag : {tag}</div>;
   // }
 
+  const nextTip = () => {
+    setCurrentTipIndex((prevIndex) => (prevIndex + 1) % tips.length);
+  };
+
+  const prevTip = () => {
+    setCurrentTipIndex((prevIndex) =>
+      prevIndex === 0 ? tips.length - 1 : prevIndex - 1
+    );
+  };
+
   return (
-    <div className="py-4 px-2">
+    <div className="py-4 px-2 flex flex-col">
       <p className="text-5xl font-bold text-gray-dark">
         {room ? room.room : ""}
       </p>
@@ -94,13 +106,34 @@ const DetailRoom = () => {
         </div>
       )}
 
-      {tips.map((tip, index) => (
-        <Advice key={index} adviceText={tip} />
-      ))}
+      {tips.length > 1 ? (
+        <div className="flex flex-col items-center w-full">
+          <Advice adviceText={tips[currentTipIndex]} />
+          <div>
+            <button
+              onClick={prevTip}
+              className="bg-gray-300 rounded-full w-8 h-8 inline-flex justify-center items-center focus:outline-none"
+            >
+              <FontAwesomeIcon icon={faCaretLeft} />
+            </button>
+            <button
+              onClick={nextTip}
+              className="bg-gray-300 rounded-full w-8 h-8 inline-flex justify-center items-center focus:outline-none"
+            >
+              <FontAwesomeIcon icon={faCaretRight} />
+            </button>
+          </div>
+          <p className="mt-3 text-center text-gray-dark">
+            {currentTipIndex + 1} / {tips.length}
+          </p>
+        </div>
+      ) : tips.length === 1 ? (
+        <Advice adviceText={tips[currentTipIndex]} />
+      ) : null}
 
       <div
         onClick={() => window.history.back()}
-        className="p-2 my-2 rounded-lg bg-green-dark text-white text-center hover:bg-green-light"
+        className="p-2 my-2 rounded-lg bg-green-dark text-white text-center hover:bg-green-light mt-auto"
       >
         <FontAwesomeIcon icon={faCaretLeft} />
         Retour
