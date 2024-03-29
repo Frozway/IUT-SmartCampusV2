@@ -26,7 +26,7 @@ class TipsController extends AbstractController
                 "chaud_dehors_chaud_dedans" => "Baissez les volets et faites un courant d'air ou utilisez des ventilateurs.",
             ),
             "humidite" => array(
-                "trop_humide" => "Utilisez un déshumidificateur",
+                "trop_humide" => "Utilisez un déshumidificateur.",
                 "trop_sec" => "Utilisez un humidificateur."
             ),
             "co2" => array(
