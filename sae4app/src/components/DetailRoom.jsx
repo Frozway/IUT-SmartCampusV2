@@ -110,8 +110,9 @@ const DetailRoom = () => {
   useEffect(() => {
     fetchRoomByTag(tagNumber).then((jsonData) => {
       room = jsonData;
-      fetchRoomByName(room.name)
+      fetchRoomByName(room.dbname)
         .then((jsonData) => {
+          console.log(jsonData);
           setValuesLoading(false);
 
           let roomValues = {
