@@ -38,3 +38,22 @@ export async function fetchRoomsByDepartment(departmentId) {
   console.log(data);
   return data.roomsDetails;
 }
+
+export async function updateRoomState(tag, newState) {
+  try {
+    const response = await fetch(`http://localhost:8000/api/rooms/${tag}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ applied: newState }) // Modification de l'attribut "applied" avec la nouvelle valeur
+    });
+    if (response.ok) {
+      console.log('État de la salle mis à jour avec succès dans la base de données');
+    } else {
+      console.error('Échec de la mise à jour de l\'état de la salle dans la base de données');
+    }
+  } catch (error) {
+    console.error('Une erreur est survenue lors de la mise à jour de l\'état de la salle dans la base de données :', error);
+  }
+}
