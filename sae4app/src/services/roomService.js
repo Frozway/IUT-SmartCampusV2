@@ -1,5 +1,3 @@
-import databaseJson from "./database.json";
-
 export async function fetchRoomByName(dbname) {
   const response = await fetch(
     "https://sae34.k8s.iut-larochelle.fr/api/captures/last?limit=12",
@@ -12,8 +10,7 @@ export async function fetchRoomByName(dbname) {
       },
     }
   );
-  const data = response.json();
-  return data;
+  return response.json();
 }
 
 export async function fetchRoomByTag(tag) {
