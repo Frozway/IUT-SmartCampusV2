@@ -142,15 +142,14 @@ const DetailRoom = () => {
 
   useEffect(() => {
     if (!valuesLoading && !apiError) {
-      fetchTipsList(values.temp, values.hum, values.co2).then((tipsList) => {
-        setTips(tipsList);
-      }, []);
+      fetchTipsList(tagNumber, values.temp, values.hum, values.co2).then(
+        (tipsList) => {
+          setTips(tipsList);
+        },
+        []
+      );
     }
   }, [values.temp, values.hum, values.co2]);
-
-  // if (!room) {
-  //   return <div>Pas de salle associée pour le tag : {tag}</div>;
-  // }
 
   const nextTip = () => {
     setCurrentTipIndex((prevIndex) => (prevIndex + 1) % tips.length);

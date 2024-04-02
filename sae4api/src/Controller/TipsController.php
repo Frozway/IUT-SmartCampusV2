@@ -6,15 +6,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
-
+use App\Entity\Room;
+use Doctrine\Persistence\ManagerRegistry;
 
 class TipsController extends AbstractController
 {
-    #[Route('/api/tips/{temp}/{hum}/{co2}', name: 'app_tips_api')]
-    public function tips(float $temp, float $hum, float $co2, HttpClientInterface $httpClient): Response 
+    // Récupérer les conseils à appliquer en fonction des données de température, d'humidité et de CO2
+    #[Route('/api/rooms/{id}/tips/{temp}/{hum}/{co2}', name: 'app_tips_api')]
+    public function tips(int $id, float $temp, float $hum, float $co2, ManagerRegistry $doctrine, HttpClientInterface $httpClient): Response 
     {
         $response = $httpClient->request('GET', "https://api.openweathermap.org/data/2.5/weather?q=La%20Rochelle&units=metric&appid=bef0f873bd6633be3fbd81bedb9a02be&lang=fr");
-
         $externalTemp = $response->toArray()['main']['temp'];
 
         $tips = array(
@@ -82,10 +83,15 @@ class TipsController extends AbstractController
             $tipsToApply[] = $tips['co2']['risque'];
         } 
 
-        return $this->json($tipsToApply);
-    
+        // Envoyer les conseils à appliquer à la base de données et à la vue
+
+        $entityManager = $doctrine->getManager();
+        $roomRepository = $entityManager->getRepository('App\Entity\Room');
+        $room = $roomRepository->find($id);
+
+        $room->setTips($tipsToApply);
+
+        return $this->json($tipsToApply); // Renvoyer les conseils à appliquer au client
     }
-
-
 
 }
