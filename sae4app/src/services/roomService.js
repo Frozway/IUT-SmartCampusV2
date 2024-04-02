@@ -12,8 +12,7 @@ export async function fetchRoomByName(roomName) {
             }
         }
     )
-    const data = response.json()
-    return data
+    return response.json()
 }
 
 export async function fetchRoomByTag(tag) {

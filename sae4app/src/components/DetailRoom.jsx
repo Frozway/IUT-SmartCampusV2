@@ -6,9 +6,7 @@ import { useEffect, useState } from "react";
 
 import Value from "./RoomValue";
 import Tip from "./Tip";
-
-import data from "./../services/database.json"; // Importation des données JSON
-import { fetchRoomByName, fetchRoomByTag } from "../services/roomService";
+import {fetchRoomByName, fetchRoomByTag} from '../services/roomService';
 import { fetchTipsList } from "../services/tipsService";
 
 function getComfortIndex(temperature, humidity, co2) {
