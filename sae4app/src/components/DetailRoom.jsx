@@ -234,7 +234,7 @@ const DetailRoom = () => {
           </p>
         </div>
       ) : tips.length === 1 ? (
-        <Advice adviceText={tips[currentTipIndex]} />
+        <Advice adviceText={tips[currentTipIndex]["text"]} />
       ) : null}
 
       <div
