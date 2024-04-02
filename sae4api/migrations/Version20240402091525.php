@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20240327100952 extends AbstractMigration
+final class Version20240402091525 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -22,7 +22,7 @@ final class Version20240327100952 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE acquisition_system (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(10) NOT NULL, is_installed TINYINT(1) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE department (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, nbrooms INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE room (id INT AUTO_INCREMENT NOT NULL, acquisition_system_id INT DEFAULT NULL, department_id INT NOT NULL, name VARCHAR(15) NOT NULL, floor INT NOT NULL, UNIQUE INDEX UNIQ_729F519B331785FF (acquisition_system_id), INDEX IDX_729F519BAE80F5DF (department_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE room (id INT AUTO_INCREMENT NOT NULL, acquisition_system_id INT DEFAULT NULL, department_id INT NOT NULL, name VARCHAR(15) NOT NULL, floor INT NOT NULL, tips JSON DEFAULT NULL COMMENT \'(DC2Type:json)\', UNIQUE INDEX UNIQ_729F519B331785FF (acquisition_system_id), INDEX IDX_729F519BAE80F5DF (department_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE room ADD CONSTRAINT FK_729F519B331785FF FOREIGN KEY (acquisition_system_id) REFERENCES acquisition_system (id)');
         $this->addSql('ALTER TABLE room ADD CONSTRAINT FK_729F519BAE80F5DF FOREIGN KEY (department_id) REFERENCES department (id)');
     }
