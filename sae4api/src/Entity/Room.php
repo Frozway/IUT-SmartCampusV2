@@ -3,19 +3,19 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\RoomRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
-use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\GetCollection;
 
 #[ORM\Entity(repositoryClass: RoomRepository::class)]
 #[ApiResource(
-    operations:[
-        New Get(),
-        New GetCollection()
+    operations: [
+        new Get(),
+        new GetCollection(),
     ],
-        normalizationContext: ['groups' => ['room:read']],
+    normalizationContext: ['groups' => ['room:read']],
 )]
 class Room
 {
@@ -48,6 +48,10 @@ class Room
     #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['room:read'])]
     private ?string $dbname = null;
+
+    #[ORM\Column]
+    #[Groups(['room:read'])]
+    private ?bool $tipApplied = null;
 
     public function getId(): ?int
     {
@@ -122,6 +126,18 @@ class Room
     public function setDbname(string $dbname): static
     {
         $this->dbname = $dbname;
+
+        return $this;
+    }
+
+    public function isTipApplied(): ?bool
+    {
+        return $this->tipApplied;
+    }
+
+    public function setTipApplied(bool $tipApplied): static
+    {
+        $this->tipApplied = $tipApplied;
 
         return $this;
     }
