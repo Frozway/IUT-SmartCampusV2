@@ -214,7 +214,7 @@ const DetailRoom = () => {
 
       {tips.length > 1 ? (
         <div className="flex flex-col items-center w-full">
-          <Advice adviceText={tips[currentTipIndex]} />
+          <Advice adviceText={tips[currentTipIndex]["text"]} />
           <div>
             <button
               onClick={prevTip}
