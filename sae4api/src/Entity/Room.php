@@ -6,7 +6,6 @@ use ApiPlatform\Metadata\ApiResource;
 use App\Repository\RoomRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
-
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 
@@ -42,6 +41,13 @@ class Room
     #[ORM\JoinColumn(nullable: false)]
     #[Groups(['room:read'])]
     private ?Department $department = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?array $tips = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['room:read'])]
+    private ?string $dbname = null;
 
     public function getId(): ?int
     {
@@ -92,6 +98,30 @@ class Room
     public function setDepartment(?Department $department): static
     {
         $this->department = $department;
+
+        return $this;
+    }
+
+    public function getTips(): ?array
+    {
+        return $this->tips;
+    }
+
+    public function setTips(?array $tips): static
+    {
+        $this->tips = $tips;
+
+        return $this;
+    }
+
+    public function getDbname(): ?string
+    {
+        return $this->dbname;
+    }
+
+    public function setDbname(string $dbname): static
+    {
+        $this->dbname = $dbname;
 
         return $this;
     }
