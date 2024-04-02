@@ -45,6 +45,10 @@ class Room
     #[ORM\Column(nullable: true)]
     private ?array $tips = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['room:read'])]
+    private ?string $dbname = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -106,6 +110,18 @@ class Room
     public function setTips(?array $tips): static
     {
         $this->tips = $tips;
+
+        return $this;
+    }
+
+    public function getDbname(): ?string
+    {
+        return $this->dbname;
+    }
+
+    public function setDbname(string $dbname): static
+    {
+        $this->dbname = $dbname;
 
         return $this;
     }
