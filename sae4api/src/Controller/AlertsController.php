@@ -26,12 +26,8 @@ class AlertsController extends AbstractController
         $alerts = array();
 
         foreach ($rooms as $room) {
-            try {
-                $dbname = $json_data[$room->getName()]['dbname'];
-            } catch (\Exception $e) {
-                $dbname = null;
-            }
-    
+            $dbname = $json_data[$room->getName()]['dbname'];
+            
             try {
                 // Effectuer une requête HTTP à votre API
                 $apiResponse = $httpClient->request('GET', "https://sae34.k8s.iut-larochelle.fr/api/captures/last?limit=3", [
