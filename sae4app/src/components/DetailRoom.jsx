@@ -5,7 +5,7 @@ import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 
 import Value from "./RoomValue";
-import Advice from "./Advice";
+import Tip from "./Tip";
 
 import data from "./../services/database.json"; // Importation des données JSON
 import { fetchRoomByName, fetchRoomByTag } from "../services/roomService";
@@ -214,7 +214,7 @@ const DetailRoom = () => {
 
       {tips.length > 1 ? (
         <div className="flex flex-col items-center w-full">
-          <Advice adviceText={tips[currentTipIndex]["text"]} />
+          <Tip tipText={tips[currentTipIndex]["text"]} />
           <div>
             <button
               onClick={prevTip}
@@ -234,7 +234,7 @@ const DetailRoom = () => {
           </p>
         </div>
       ) : tips.length === 1 ? (
-        <Advice adviceText={tips[currentTipIndex]["text"]} />
+        <Tip tipText={tips[currentTipIndex]["text"]} />
       ) : null}
 
       <div
