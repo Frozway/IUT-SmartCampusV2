@@ -3,6 +3,8 @@ import {fetchDepartments} from '../services/departmentService';
 
 import DepartmentItem from './DepartmentItem';
 import SearchBar from './SearchBar';
+import AlertsList from './AlertsList';
+import Spinner from './Spinner';
 
 const DepartmentList = () => {
     const [departments, setDepartments] = useState([]);
@@ -25,9 +27,11 @@ const DepartmentList = () => {
 
     return (
         <div className="department-list">
+            <AlertsList departmentId={3}/>
+
             {isLoading ? (
                 <div className="flex justify-center items-center h-screen">
-                    <p className="text-3xl font-bold text-center">⌛Chargement des départements...⌛</p>
+                    <Spinner />
                 </div>
             ) : (
                 departments.map((departmentData, index) => (

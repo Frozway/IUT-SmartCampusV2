@@ -3,6 +3,7 @@ import RoomItem from './RoomItem';
 import { fetchRoomsByDepartment } from '../services/roomService'; // Importer le service
 
 import PropTypes from 'prop-types';
+import Spinner from './Spinner';
 
 const RoomList = (props) => {
     const [rooms, setRooms] = useState([]);
@@ -30,7 +31,7 @@ const RoomList = (props) => {
     }
 
     if (isLoading) {
-      return <div>Chargement en cours...</div>;
+      <Spinner />
     }
 
     if (error) {
@@ -39,6 +40,7 @@ const RoomList = (props) => {
 
     return (
         <div className="room-list">
+          <hr className='mt-4'/>
             {/* Mapper les données des chambres pour afficher chaque RoomItem une fois que les salles sont chargées */}
             {rooms.map((roomData, index) => (
                 nameContainsSlug(roomData.name, props.roomSearch) || props.roomSearch == "" ?
