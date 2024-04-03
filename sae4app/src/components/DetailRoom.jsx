@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 import Value from "./RoomValue";
 import Tip from "./Tip";
-import {fetchRoomByName, fetchRoomByTag} from '../services/roomService';
+import { fetchRoomByName, fetchRoomByTag } from "../services/roomService";
 import { fetchTipsList } from "../services/tipsService";
 import Spinner from "./Spinner";
 
@@ -221,7 +221,10 @@ const DetailRoom = () => {
 
       {tips.length > 1 ? (
         <div className="flex flex-col items-center w-full mb-4">
-          <Tip tipText={tips[currentTipIndex]["text"]} />
+          {tips.map(
+            (tip, index) =>
+              index === currentTipIndex && <Tip key={index} tip={tip} />
+          )}
           <div className="flex items-center">
             <button
               onClick={prevTip}
@@ -241,10 +244,9 @@ const DetailRoom = () => {
               <FontAwesomeIcon icon={faCaretRight} />
             </button>
           </div>
-          
         </div>
       ) : tips.length === 1 ? (
-        <Tip tipText={tips[currentTipIndex]["text"]} />
+        <Tip tip={tips[currentTipIndex]} />
       ) : null}
 
       <div
