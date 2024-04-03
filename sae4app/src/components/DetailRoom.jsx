@@ -216,7 +216,7 @@ const DetailRoom = () => {
 
       {tips.length > 1 ? (
         <div className="flex flex-col items-center w-full mb-4">
-          <Tip tipText={tips[currentTipIndex]["text"]} />
+          <Tip tip={tips[currentTipIndex]} />
           <div className="flex items-center">
             <button
               onClick={prevTip}
@@ -239,7 +239,7 @@ const DetailRoom = () => {
           
         </div>
       ) : tips.length === 1 ? (
-        <Tip tipText={tips[currentTipIndex]["text"]} />
+        <Tip tip={tips[currentTipIndex]} />
       ) : null}
 
       <div
