@@ -18,16 +18,19 @@ const AlertsList = (props) => {
 
     return (
         <div className="p-4 m-2 rounded-lg shadow-lg border-s-blue-dark border-l-8 drop-shadow-md relative">
-            <h2>Alertes</h2>
+            <h2 className='font-medium'>Alertes</h2>
             {
                 isLoading ? 
                     <p>Loading...</p>
                 :
-                    Object.keys(alerts).map((room, index) => (
-                        <Link to={`/room/${room}`} key={index} >
-                            <p className={`p-2 my-2 bg-${alerts[room].alertLevel}-dark rounded-lg text-white font-bold strong-shadow`}>{alerts[room].roomName}</p>
-                        </Link>
-                    ))
+                    alerts.length == 0 ?
+                        <p className='text-gray-light'>Aucune alerte</p>
+                    :
+                        Object.keys(alerts).map((room, index) => (
+                            <Link to={`/room/${room}`} key={index} >
+                                <p className={`p-2 my-2 bg-${alerts[room].alertLevel}-dark rounded-lg text-white font-bold strong-shadow`}>{alerts[room].roomName}</p>
+                            </Link>
+                        ))
             }
         </div>
     )
