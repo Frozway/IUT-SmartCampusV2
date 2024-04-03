@@ -200,7 +200,7 @@ const DetailRoom = () => {
             <span className="text-4xl font-bold">{comfortIndex}</span>
             <span>/10</span>
             {/*  Note supérieur à 8 = confort optimal, note supérieur à 6 = confort acceptable, note supérieur à 4 = confort médiocre sinon confort insuffisant*/}
-            <span className="ml-auto">
+            <span className="ml-auto text-right">
               {comfortIndex > 8
                 ? "CONFORT OPTIMAL"
                 : comfortIndex > 6
