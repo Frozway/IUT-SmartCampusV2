@@ -78,12 +78,14 @@ const AppStaff = () => {
         </div>
         <div className="flex items-center justify-between">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
             type="submit"
           >
             Se connecter
           </button>
-          {error && <div className="text-red-500 text-sm">{error}</div>}
+          {error && (
+            <div className="text-red-500 text-sm text-center pl-4">{error}</div>
+          )}
         </div>
       </form>
     </div>
