@@ -215,15 +215,20 @@ const DetailRoom = () => {
       )}
 
       {tips.length > 1 ? (
-        <div className="flex flex-col items-center w-full">
+        <div className="flex flex-col items-center w-full mb-4">
           <Tip tipText={tips[currentTipIndex]["text"]} />
-          <div>
+          <div className="flex items-center">
             <button
               onClick={prevTip}
               className="bg-gray-300 rounded-full w-8 h-8 inline-flex justify-center items-center focus:outline-none"
             >
               <FontAwesomeIcon icon={faCaretLeft} />
             </button>
+
+            <p className="mx-4 text-center text-gray-dark">
+              {currentTipIndex + 1} / {tips.length}
+            </p>
+
             <button
               onClick={nextTip}
               className="bg-gray-300 rounded-full w-8 h-8 inline-flex justify-center items-center focus:outline-none"
@@ -231,9 +236,7 @@ const DetailRoom = () => {
               <FontAwesomeIcon icon={faCaretRight} />
             </button>
           </div>
-          <p className="mt-3 text-center text-gray-dark">
-            {currentTipIndex + 1} / {tips.length}
-          </p>
+          
         </div>
       ) : tips.length === 1 ? (
         <Tip tipText={tips[currentTipIndex]["text"]} />
