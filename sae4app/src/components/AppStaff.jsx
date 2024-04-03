@@ -105,7 +105,6 @@ const AppStaff = () => {
       </div>
     );
   }
->>>>>>> sae4app/src/components/AppStaff.jsx
 };
 
 export default AppStaff;
