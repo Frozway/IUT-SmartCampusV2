@@ -1,209 +1,57 @@
-<h1>Stack de développement Api-Platform-React-Mariadb de la SAE4</h1>
+# SmartCampus | K13
 
-**Contenu :**
+<div align="center">
+  <img src="./Images/logo.png" width="500">
+</div>
 
-- [Prérequis](#prérequis)
-- [Démarrage](#démarrage)
-  - [1. Forker le modèle de stack](#1-forker-le-modèle-de-stack)
-  - [2. Cloner la stack du projet](#2-cloner-la-stack-du-projet)
-  - [3. Démarrer la stack du projet](#3-démarrer-la-stack-du-projet)
-- [Initialiser le service Api-Platform `sae4api`](#initialiser-le-service-api-platform-sae4api)
-- [Initialiser le service React `sae4app`](#initialiser-le-service-react-sae4app)
-- [Partager le projet](#partager-le-projet)
-- [Contenu de la docker stack](#contenu-de-la-docker-stack)
-  - [fichier .env](#fichier-env)
-  - [Fichier .gitignore](#fichier-gitignore)
-  - [dossier build](#dossier-build)
-    - [database](#database)
-    - [nginx](#nginx)
-    - [sae4api](#sae4api)
-    - [sae4appp](#sae4appp)
+# Bienvenue sur le Projet Smart Campus - K13
 
+Ce projet vise à développer une application Web pour le Smart Campus de l'IUT de La Rochelle, afin de collecter des données environnementales telles que le taux d'humidité, le taux de CO2 et la température des salles. L'application fournira des recommandations pour optimiser l'environnement en fonction de ces mesures.
 
-## Prérequis
+## Documentation
 
-Sur votre machine Mac, Windows ou Linux :
+Pour des informations détaillées sur le projet, veuillez consulter notre [Wiki](https://forge.iut-larochelle.fr/2023-2024-but-info2-a-sae34/k1/k13/smartcampuss4/-/wikis/home).
 
-- Docker 20.20 au moins
-- (Docker) Compose  
-  (Installer Docker Desktop satisfait ces deux pré-requis)
-- Un éditeur de texte ou un IDE
-- L'accès à un terminal
+## 1. Stratégie de gestion des Branches et des commits
 
-De manière optionnelle, mais fortement recommandée :
+Le développement du projet est organisé en utilisant les branches Git. Voici la structure que nous utilisons :
 
-- Une [clé SSH](https://forge.iut-larochelle.fr/help/ssh/index#generate-an-ssh-key-pair) active sur votre machine
-  (perso) et [ajoutée dans votre compte gitlab](https://forge.iut-larochelle.fr/help/ssh/index#add-an-ssh-key-to-your-gitlab-account) :  
-  elle vous permettra de ne pas taper votre mot de passe en permanence.
-- PHPStorm  
-  _Votre email étudiant vous permet de bénéficier d'une licence complète de 12 mois pour tous les produits JetBrains_  
-  ...Mais vous pouvez bien sûr utiliser l'IDE de votre choix.
-
-## Démarrage
-
-### 1. Forker le modèle de stack
-
-**UN.E SEUL.E** des développeuses/développeurs de votre équipe va **fork** le présent dépôt, pour en créer un nouveau, 
-dans le groupe correspondant à votre équipe :  
-_Par exemple pour l'équipe 3 du groupe de TP X1, le groupe est :_ `2023-2024-BUT-INFO2-A-SAE34/K1/K11`
-
-<div align="center" ><img src="stack_sae4_img_fork.png" width=500/></div>
-
-**Remarque** : 
->Il n'est pas nécessaire de conserver le lien avec le modèle de stack, vous pouvez donc aller dans  
-> Settings > General > Advanced (dans Gitlab) pour supprimer le "Fork relationship" de votre projet
-
-
-### 2. Cloner la stack du projet 
-
-Le membre de l'équipe qui a réalisé le fork, doit cloner ce nouveau dépôt sur son poste de travail 
-
-⚠️ **Si vous êtes sous Linux**  
-> Avant de démarrer la stack, il faut renseigner les variables qui se trouvent dans le fichier `.env` à la racine du dépôt     
-> Vous pouvez obtenir l'id de votre user (et de son groupe) en lançant la commande `id -u ${USER}` dans un terminal
-
-### 3. Démarrer la stack du projet 
-
-Dans un terminal positionné dans le dossier de la stack du projet : 
-
-- démarrer la stack    
-```
-docker compose up --build
+```plaintext
+main
+└── dev
+      └── v(numVersion)/(nameFeatures)
 ```
 
-- inspecter l'état des services 
-```
-docker compose ps
-```
+- `main` : Version stable et finale de l'application.
+- `dev` : Environnement de développement pour la version en cours.
+- `v<numVersion>/<nameFeature>` : Branche pour le développement de nouvelles fonctionnalités.
 
-## Initialiser le service Api-Platform `sae4api`
+#### Cas d'utilisation
 
-Un projet Api-Platform, créé via la commande : 
-```bash 
-composer create-project symfony/skeleton:"6.3.*" sfapi
-```
-est déjà disponible dans le dossier sae4api du dépôt.
+- **Développement et Intégration d'une Fonctionnalité :** <br>
+  Ce cas d'utilisation permet à chaque développeur de travailler sur sa propre fonctionnalité, de la sauvegarder régulièrement dans sa branche respective, puis de l'intégrer dans la branche release-1.0. Cela assure un développement itératif et une intégration progressive des fonctionnalités.
 
-Si vous souhaitez ajouter des dépendances : 
+- **Récupération des Fonctionnalités Mises à Jour depuis la Branche dev :** <br>
+  Ce cas d'utilisation permet à chaque développeur de récupérer les fonctionnalités mises à jour depuis la branche dev sur sa branche de développement. Cela assure que chacun travaille sur une version à jour de l'application et réduit les conflits lors des fusions.
 
-- on se connecte au conteneur associé su service `sae4api` 
+## 2. Format des Messages de Commit
 
-```bash
-docker compose exec sae4api bash
-```
-- après connexion, on doit être dans `/app`, vérifier 
+Il est important que les messages de commit soient explicites et que des conventions soient respectées par l'équipe : **`<type>(<portée>): <sujet>`**
 
-- installer les dépendances 
+Pour plus de détails sur nos stratégies au sein du projet, consultez la [page dédiée de notre guide au sein de notre projet](https://forge.iut-larochelle.fr/2023-2024-but-info2-a-sae34/k1/k13/smartcampuss4/-/wikis/Guide%20d'utilisation%20de%20Git) sur notre [Wiki](https://forge.iut-larochelle.fr/2023-2024-but-info2-a-sae34/k1/k13/smartcampuss4/-/wikis/home).
 
-```bash
-cd /app/sae4api 
-composer install
-```
+## 3. Comment faire fonctionner la stack ?
 
-- vérifier l'exécution du service `sae4api` : [http://localhost:8000](http://localhost:8000)
+Après avoir cloné le repository et lancé la stack docker, il faut exécuter quelques comandes pour installer les dépendances nécéssaires et différentes en fonction de la machine.
 
+1. Se connecter au container : `docker exec -it but-info2-a-sae3-docker-stack-sfapp bash`
 
-## Initialiser le service React `sae4app`
+2. Rentrer dans le dossier du projet : `cd sfapp/`
 
-Un projet react, créé via Vite par défaut est déjà disponible dans le dossier `sae4app` du dépôt.
+3. Installer les dépendances : `composer install`
 
-Si vous souhaitez ajouter des dépendances : 
+4. Effectuer les migrations pour obtenir la base de donnée : `php bin/console doctrine:migrations:migrate`
+Répondre **yes**
 
-- on se connecte au conteneur associé su service `sae4app` 
-
-```bash
-docker compose exec sae4app bash
-```
-- après connexion, on doit être dans `/app`, vérifier 
-
-- installer les dépendances 
-
-```bash
-yarn add <nom-de-la-dépendance> # pour une dépendance de développement
-```
-
-- vérifier l'exécution du service `sae4app` : [http://localhost:5173](http://localhost:5173)
-
-**Remarque**       
-Si le projet React `sae4app` ne démarre pas, dans ce cas contacter votre Tonton DEV. 
-
-## Partager le projet
-
-À ce stade, les services `sae4api` et `sae4app` sont créés et démarrés, autrement dit fonctionnels, alors : 
-- on fait `commit` et `push` pour partager avec les autres membres de l'équipe
-- on déclare tout les membres de l'équipe dans le dépôt du projet avec le rôle `Developer` (si ce n'est pas déjà fait :-))
-- chaque membre de l'équipe peut alors 
-  - cloner ce nouveau dépôt sur son poste de travail 
-  - démarrer toute la stack docker du projet 
-
-
-## Contenu de la docker stack 
-```
-.
-├── .env
-├── .gitignore
-├── build
-│   ├── database
-│   │   ├── Dockerfile
-│   │   └── myconf.cnf
-│   ├── nginx
-│   │   ├── Dockerfile
-│   │   └── default.conf
-│   └── sae4api
-│   │   ├── Dockerfile
-│   │   └── default.ini
-│   └── sae4app
-│       └── Dockerfile
-├── sae4api
-├── sae4app       
-└── compose.yml
-```
-
-### fichier .env 
-Ce fichier déclare des variables d'environnement.    
-Ces variables définissent l'utilisateur qui exécute la stack docker.     
-On définit les valeurs de ces variables uniquement si on est sous **LINUX**.     
-Par défaut, ces variables sont commentées. 
-
-Exemple : 
-```
-USER_NAME=jmalki
-USER_ID=1000
-GROUP_NAME=jmalki
-GROUP_ID=1000
-```
-
-### Fichier .gitignore
-Ce fichier déclare tous les artefacts du projet qui ne doivent pas être poussés dans le repository gitlab distant. 
-
-### dossier build 
-
-#### database
-On utilise une base de données de type `mariadb-10.10.2`.     
-L'image docker se trouve dans la registry de l'IUT.    
-On ajoute un fichier de configuration.    
-
-Le Dockerfile : 
-```
-FROM forge-registry.iut-larochelle.fr/mariadb/mariadb-10.10.2
-COPY ./build/database/myconf.cnf /etc/mysql/conf.d/.
-```
-
-#### nginx 
-On utilise un serveur web de type `nginx-1.23.3`.     
-L'image docker se trouve dans la registry de l'IUT.    
-On ajoute un fichier de configuration du host qui permet l'accès à notre application.     
-Dans le conteneur, on crée le dossier `/app` qui va contenir le code source de notre application.     
-
-Le Dockerfile : 
-```
-FROM forge-registry.iut-larochelle.fr/nginx/nginx-1.23.3
-COPY ./build/nginx/default.conf /etc/nginx/conf.d/default.conf
-RUN mkdir /app
-```
-
-#### sae4api 
-Projet Api-Platform pour le backend 
-
-#### sae4appp
-Projet react pour le fontend 
+5. Charger les fixtures (remplissage de la base de donnée) : `php bin/console doctrine:fixtures:load`
+Répondre **yes**

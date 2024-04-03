@@ -6,6 +6,8 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use App\Repository\RoomRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -42,16 +44,17 @@ class Room
     #[Groups(['room:read'])]
     private ?Department $department = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?array $tips = null;
-
     #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['room:read'])]
     private ?string $dbname = null;
 
-    #[ORM\Column]
-    #[Groups(['room:read'])]
-    private ?bool $tipApplied = null;
+    #[ORM\OneToMany(targetEntity: Tip::class, mappedBy: 'room', orphanRemoval: true)]
+    private Collection $tips;
+
+    public function __construct()
+    {
+        $this->tips = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -106,18 +109,6 @@ class Room
         return $this;
     }
 
-    public function getTips(): ?array
-    {
-        return $this->tips;
-    }
-
-    public function setTips(?array $tips): static
-    {
-        $this->tips = $tips;
-
-        return $this;
-    }
-
     public function getDbname(): ?string
     {
         return $this->dbname;
@@ -130,14 +121,32 @@ class Room
         return $this;
     }
 
-    public function isTipApplied(): ?bool
+    /**
+     * @return Collection<int, Tip>
+     */
+    public function getTips(): Collection
     {
-        return $this->tipApplied;
+        return $this->tips;
     }
 
-    public function setTipApplied(bool $tipApplied): static
+    public function addTip(Tip $tip): static
     {
-        $this->tipApplied = $tipApplied;
+        if (!$this->tips->contains($tip)) {
+            $this->tips->add($tip);
+            $tip->setRoom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTip(Tip $tip): static
+    {
+        if ($this->tips->removeElement($tip)) {
+            // set the owning side to null (unless already changed)
+            if ($tip->getRoom() === $this) {
+                $tip->setRoom(null);
+            }
+        }
 
         return $this;
     }

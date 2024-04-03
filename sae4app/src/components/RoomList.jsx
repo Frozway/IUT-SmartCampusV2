@@ -3,6 +3,7 @@ import RoomItem from './RoomItem';
 import { fetchRoomsByDepartment } from '../services/roomService'; // Importer le service
 
 import PropTypes from 'prop-types';
+import Spinner from './Spinner';
 
 const RoomList = (props) => {
     const [rooms, setRooms] = useState([]);
@@ -30,7 +31,7 @@ const RoomList = (props) => {
     }
 
     if (isLoading) {
-      return <div>Chargement en cours...</div>;
+      <Spinner />
     }
 
     if (error) {
