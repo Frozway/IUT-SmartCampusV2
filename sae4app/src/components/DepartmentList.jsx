@@ -3,6 +3,7 @@ import {fetchDepartments} from '../services/departmentService';
 
 import DepartmentItem from './DepartmentItem';
 import SearchBar from './SearchBar';
+import AlertsList from './AlertsList';
 
 const DepartmentList = () => {
     const [departments, setDepartments] = useState([]);
@@ -25,6 +26,8 @@ const DepartmentList = () => {
 
     return (
         <div className="department-list">
+            <AlertsList departementId={3}/>
+
             {isLoading ? (
                 <div className="flex justify-center items-center h-screen">
                     <p className="text-3xl font-bold text-center">⌛Chargement des départements...⌛</p>
