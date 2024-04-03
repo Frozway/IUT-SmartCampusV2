@@ -47,14 +47,14 @@ const Value = (props) => {
     if (props.value == null) {
         // Error message
         return (
-            <p className='p-4 my-2 rounded-2xl bg-gray-light text-gray-dark drop-shadow-md flex items-end text-center'>
+            <p className='p-4 my-2 rounded-2xl bg-gray-light text-gray-dark strong-shadow flex items-end text-center'>
               Une erreur est survenue
             </p>
         )
         
     } else {
         return (
-            <div className={'p-4 my-2 rounded-2xl shadow-strong bg-' + (color === "green" ? "green-dark" : (color === "orange" ? "yellow-dark" : "red-dark")) + ' text-white drop-shadow-md flex items-end'}>
+            <div className={'p-4 my-2 rounded-2xl strong-shadow bg-' + (color === "green" ? "green-dark" : (color === "orange" ? "yellow-dark" : "red-dark")) + ' text-white drop-shadow-md flex items-end'}>
               <span className='text-4xl font-bold'>{ props.value }</span><span>{ unit }</span>
               <FontAwesomeIcon icon={icon} className='ml-auto size-10' />
             </div>
