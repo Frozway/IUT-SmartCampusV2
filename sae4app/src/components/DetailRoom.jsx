@@ -113,7 +113,6 @@ const DetailRoom = () => {
       room = jsonData;
       fetchRoomByName(room.dbname)
         .then((jsonData) => {
-          console.log(jsonData);
           setValuesLoading(false);
 
           let roomValues = {
@@ -133,7 +132,7 @@ const DetailRoom = () => {
           );
         })
         .catch((error) => {
-          console.log(`Une erreur est survenue: ${error}`);
+          console.error(error);
           setApiError(true);
           setValuesLoading(false);
         });
@@ -172,7 +171,7 @@ const DetailRoom = () => {
           <Spinner />
         </div>
       ) : apiError ? (
-        <div className="p-4 py-8 my-4 rounded-2xl bg-red-light drop-shadow-md flex items-end text-red-dark text-center">
+        <div className="p-4 py-8 my-4 rounded-2xl bg-red-light strong-shadow flex items-end text-red-dark text-center">
           <p className="w-full">Une erreur est survenue</p>
         </div>
       ) : (
@@ -184,7 +183,7 @@ const DetailRoom = () => {
           ></div>
           <div
             className={
-              "p-4 py-8 my-4 rounded-2xl bg-" +
+              "p-4 py-8 my-4 strong-shadow rounded-2xl bg-" +
               (comfortIndex > 8
                 ? "green-dark"
                 : comfortIndex > 6
@@ -244,7 +243,7 @@ const DetailRoom = () => {
 
       <div
         onClick={() => window.history.back()}
-        className="p-2 my-2 rounded-lg bg-green-dark text-white text-center hover:bg-green-light mt-auto"
+        className="p-2 my-2 strong-shadow mt-4 rounded-lg bg-green-dark text-white text-center hover:bg-green-light mt-auto"
       >
         <FontAwesomeIcon icon={faCaretLeft} />
         Retour
