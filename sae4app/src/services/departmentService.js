@@ -13,8 +13,7 @@ export async function fetchAlertByDepartement(departmentId) {
   )
 
   if (response.ok) {
-    const data = await response.json();
-    return data;
+    return await response.json();
   } else {
     throw new Error("Service indisponible")
   }
