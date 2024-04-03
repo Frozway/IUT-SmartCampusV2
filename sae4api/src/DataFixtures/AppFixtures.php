@@ -52,6 +52,7 @@ class AppFixtures extends Fixture
         $room1->setFloor(2);
         $room1->setAcquisitionSystem($as1);
         $room1->setDepartment($department);
+        $room1->setDbname("sae34bdk1eq1");
         $manager->persist($room1);
 
         $as1->setRoom($room1);
@@ -68,6 +69,7 @@ class AppFixtures extends Fixture
         $room2->setFloor(2);
         $room2->setAcquisitionSystem($as2);
         $room2->setDepartment($department);
+        $room2->setDbname("sae34bdk1eq2");
         $manager->persist($room2);
 
         $as2->setRoom($room2);
@@ -84,6 +86,7 @@ class AppFixtures extends Fixture
         $room3->setFloor(2);
         $room3->setAcquisitionSystem($as3);
         $room3->setDepartment($department);
+        $room3->setDbname("sae34bdk1eq3");
         $manager->persist($room3);
 
         $as3->setRoom($room3);
@@ -100,6 +103,7 @@ class AppFixtures extends Fixture
         $room4->setFloor(2);
         $room4->setAcquisitionSystem($as4);
         $room4->setDepartment($department);
+        $room4->setDbname("sae34bdk2eq1");
         $manager->persist($room4);
 
         $as4->setRoom($room4);
@@ -116,6 +120,7 @@ class AppFixtures extends Fixture
         $room5->setFloor(2);
         $room5->setAcquisitionSystem($as5);
         $room5->setDepartment($department);
+        $room5->setDbname("sae34bdk2eq2");
         $manager->persist($room5);
 
         $as5->setRoom($room5);
@@ -132,6 +137,7 @@ class AppFixtures extends Fixture
         $room6->setFloor(3);
         $room6->setAcquisitionSystem($as6);
         $room6->setDepartment($department);
+        $room6->setDbname("sae34bdk2eq3");
         $manager->persist($room6);
 
         $as6->setRoom($room6);
@@ -148,6 +154,7 @@ class AppFixtures extends Fixture
         $room7->setFloor(3);
         $room7->setAcquisitionSystem($as7);
         $room7->setDepartment($department);
+        $room7->setDbname("sae34bdl1eq1");
         $manager->persist($room7);
 
         $as7->setRoom($room7);
@@ -164,6 +171,7 @@ class AppFixtures extends Fixture
         $room8->setFloor(1);
         $room8->setAcquisitionSystem($as8);
         $room8->setDepartment($department);
+        $room8->setDbname("sae34bdl1eq2");
         $manager->persist($room8);
 
         $as8->setRoom($room8);
@@ -180,6 +188,7 @@ class AppFixtures extends Fixture
         $room9->setFloor(1);
         $room9->setAcquisitionSystem($as9);
         $room9->setDepartment($department);
+        $room9->setDbname("sae34bdl1eq3");
         $manager->persist($room9);
 
         $as9->setRoom($room9);
@@ -196,6 +205,7 @@ class AppFixtures extends Fixture
         $room10->setFloor(1);
         $room10->setAcquisitionSystem($as10);
         $room10->setDepartment($department);
+        $room10->setDbname("sae34bdl2eq1");
         $manager->persist($room10);
 
         $as10->setRoom($room10);
@@ -212,6 +222,7 @@ class AppFixtures extends Fixture
         $room11->setFloor(0);
         $room11->setAcquisitionSystem($as11);
         $room11->setDepartment($department);
+        $room11->setDbname("sae34bdl2eq2");
         $manager->persist($room11);
 
         $as11->setRoom($room11);
@@ -228,6 +239,7 @@ class AppFixtures extends Fixture
         $room12->setFloor(0);
         $room12->setAcquisitionSystem($as12);
         $room12->setDepartment($department);
+        $room12->setDbname("sae34bdl2eq3");
         $manager->persist($room12);
 
         $as12->setRoom($room12);
@@ -244,6 +256,7 @@ class AppFixtures extends Fixture
         $room13->setFloor(0);
         $room13->setAcquisitionSystem($as13);
         $room13->setDepartment($department);
+        $room13->setDbname("sae34bdm1eq1");
         $manager->persist($room13);
 
         $as13->setRoom($room13);
@@ -260,6 +273,7 @@ class AppFixtures extends Fixture
         $room14->setFloor(0);
         $room14->setAcquisitionSystem($as14);
         $room14->setDepartment($department);
+        $room14->setDbname("sae34bdm1eq2");
         $manager->persist($room14);
 
         $as14->setRoom($room14);
@@ -276,6 +290,7 @@ class AppFixtures extends Fixture
         $room15->setFloor(0);
         $room15->setAcquisitionSystem($as15);
         $room15->setDepartment($department);
+        $room15->setDbname("sae34bdm1eq3");
         $manager->persist($room15);
 
         $as15->setRoom($room15);
@@ -292,6 +307,7 @@ class AppFixtures extends Fixture
         $room16->setFloor(2);
         $room16->setAcquisitionSystem($as16);
         $room16->setDepartment($department);
+        $room16->setDbname("sae34bdm2eq1");
         $manager->persist($room16);
 
         $as16->setRoom($room16);
@@ -308,6 +324,7 @@ class AppFixtures extends Fixture
         $room17->setFloor(3);
         $room17->setAcquisitionSystem($as17);
         $room17->setDepartment($department);
+        $room17->setDbname("sae34bdm2eq2");
         $manager->persist($room17);
 
         $as17->setRoom($room17);
@@ -324,6 +341,7 @@ class AppFixtures extends Fixture
         $room18->setFloor(0);
         $room18->setAcquisitionSystem($as18);
         $room18->setDepartment($department);
+        $room18->setDbname("sae34bdm2eq3");
         $manager->persist($room18);
 
         $as18->setRoom($room18);
