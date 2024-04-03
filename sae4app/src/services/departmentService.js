@@ -10,6 +10,11 @@ export async function fetchAlertByDepartement(departmentId) {
     {
       method: "GET"
     }
-  );
-  return await response.json();
+  )
+
+  if (response.ok) {
+    return await response.json();
+  } else {
+    throw new Error("Service indisponible")
+  }
 }

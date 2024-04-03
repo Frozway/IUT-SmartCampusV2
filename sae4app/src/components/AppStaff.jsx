@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import StaffDepartmentList from "./StaffDepartmentList";
+
 const AppStaff = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -43,10 +45,8 @@ const AppStaff = () => {
 
   if (isLoggedIn) {
     return (
-      <div className="flex justify-center pt-10 text-xl">
-        <div>
-          <h1>Bienvenue sur la page du staff</h1>
-        </div>
+      <div className="flex justify-center flex-col">
+        <StaffDepartmentList />
       </div>
     );
   } else {
