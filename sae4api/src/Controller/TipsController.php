@@ -27,12 +27,12 @@ class TipsController extends AbstractController
         if (!$room->getTips()->isEmpty()) {
             $lastTip = $room->getTips()->last();
             $lastTipDate = $lastTip->getDate();
-            $interval = $currentDateTime->diff($lastTipDate);
-            if ($interval->i < 15) {
+            // Si le dernier conseil a été ajouté il y a moins de 15 minutes, retourner les conseils
+            if ($currentDateTime->getTimestamp() - $lastTipDate->getTimestamp() < 900) {
                 return $this->json($room->getTips());
             }
         }
-        
+
         // Vider la collection de conseils de la salle
         $room->getTips()->clear();
 
@@ -49,38 +49,30 @@ class TipsController extends AbstractController
             ),
             "humidite" => array(
                 "trop_humide" => "Utilisez un déshumidificateur.",
-                "trop_sec" => "Utilisez un humidificateur."
+                "trop_sec" => "Utilisez un humidificateur.",
             ),
             "co2" => array(
                 "risque" => "Allumez les VMC et ouvrez les portes pour aérer.",
-            )
+            ),
         );
 
         $tipsToApply = array();
-    
+
         // ****************** Filtrer les conseils basés sur la température ******************
 
         if ($temp < 18 && $externalTemp < 18) // Si il fait froid dehors et dedans
         {
             $tipsToApply[] = new Tip($tips['temperature']['trop_froid'], $currentDateTime, false, $room);
-        } 
-        
-        elseif ($temp < 18 && $externalTemp > 18) // Si il fait froid dedans et chaud dehors
+        } elseif ($temp < 18 && $externalTemp > 18) // Si il fait froid dedans et chaud dehors
         {
-            $tipsToApply[] = new Tip($tips['temperature']['chaud_dehors_froid_dedans'], $currentDateTime, false, $room);            
-        } 
-        
-        elseif ($temp > 26 && $externalTemp < 18) // Si il fait chaud dedans et froid dehors
+            $tipsToApply[] = new Tip($tips['temperature']['chaud_dehors_froid_dedans'], $currentDateTime, false, $room);
+        } elseif ($temp > 26 && $externalTemp < 18) // Si il fait chaud dedans et froid dehors
         {
             $tipsToApply[] = new Tip($tips['temperature']['chaud_dedans_froid_dehors'], $currentDateTime, false, $room);
-        } 
-        
-        elseif ($temp > 26 && $externalTemp > 26) // Si il fait chaud dehors et dedans
+        } elseif ($temp > 26 && $externalTemp > 26) // Si il fait chaud dehors et dedans
         {
             $tipsToApply[] = new Tip($tips['temperature']['chaud_dehors_chaud_dedans'], $currentDateTime, false, $room);
-        } 
-        
-        elseif ($temp > 26 && ($externalTemp > 18 && $externalTemp < 26)) // Si il fait chaud dedans et acceptable dehors
+        } elseif ($temp > 26 && ($externalTemp > 18 && $externalTemp < 26)) // Si il fait chaud dedans et acceptable dehors
         {
             $tipsToApply[] = new Tip($tips['temperature']['trop_chaud'], $currentDateTime, false, $room);
         }
@@ -90,19 +82,17 @@ class TipsController extends AbstractController
         if ($hum < 30) // Si le taux d'humidité est inférieur à 30%
         {
             $tipsToApply[] = new Tip($tips['humidite']['trop_sec'], $currentDateTime, false, $room);
-        } 
-        
-        elseif ($hum > 70) // Si le taux d'humidité est supérieur à 70%
+        } elseif ($hum > 70) // Si le taux d'humidité est supérieur à 70%
         {
             $tipsToApply[] = new Tip($tips['humidite']['trop_humide'], $currentDateTime, false, $room);
-        } 
-    
+        }
+
         // ****************** Filtrer les conseils basés sur le CO2 **********************
 
         if ($co2 > 1000) // Si le taux de CO2 est supérieur à 1000 ppm
         {
             $tipsToApply[] = new Tip($tips['co2']['risque'], $currentDateTime, false, $room);
-        } 
+        }
 
         // Parcourir les conseils à appliquer et les ajouter à la salle avec addTip
 
