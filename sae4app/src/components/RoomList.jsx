@@ -40,6 +40,7 @@ const RoomList = (props) => {
 
     return (
         <div className="room-list">
+          <hr className='mt-4'/>
             {/* Mapper les données des chambres pour afficher chaque RoomItem une fois que les salles sont chargées */}
             {rooms.map((roomData, index) => (
                 nameContainsSlug(roomData.name, props.roomSearch) || props.roomSearch == "" ?

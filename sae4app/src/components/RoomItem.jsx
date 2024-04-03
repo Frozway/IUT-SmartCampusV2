@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom'
 const RoomItem = (props) => {
     return (
         <Link to={`/room/${props.room.id}`}>
-            <div className="p-4 m-2 rounded-lg shadow-lg border-s-green-dark border-l-8 drop-shadow-md">
+            <div className="py-4 m-0">
                 <h3>{props.room.name}</h3>
             </div>
+            <hr className=''/>
         </Link>
     )
 }
