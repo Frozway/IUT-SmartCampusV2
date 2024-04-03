@@ -8,6 +8,7 @@ import Value from "./RoomValue";
 import Tip from "./Tip";
 import {fetchRoomByName, fetchRoomByTag} from '../services/roomService';
 import { fetchTipsList } from "../services/tipsService";
+import Spinner from "./Spinner";
 
 function getComfortIndex(temperature, humidity, co2) {
   // Définition des plages de confort et des pénalités
@@ -167,7 +168,9 @@ const DetailRoom = () => {
       </p>
 
       {valuesLoading ? (
-        <p className="p-4 rounded shadow-md">Loading...</p>
+        <div className="flex w-full justify-center mb-2">
+          <Spinner />
+        </div>
       ) : apiError ? (
         <div className="p-4 py-8 my-4 rounded-2xl bg-red-light drop-shadow-md flex items-end text-red-dark text-center">
           <p className="w-full">Une erreur est survenue</p>
