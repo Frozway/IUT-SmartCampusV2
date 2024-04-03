@@ -9,7 +9,7 @@ const AlertsList = (props) => {
 
     // Api call
     useEffect(() => {
-        fetchAlertByDepartement(props.departementId)
+        fetchAlertByDepartement(props.departmentId)
         .then(data => {
             setAlerts(data),
             setIsLoading(false)
@@ -37,7 +37,7 @@ const AlertsList = (props) => {
 }
 
 AlertsList.propTypes = {
-    departementId: PropTypes.number.isRequired
+    departmentId: PropTypes.number.isRequired
 }
 
 export default AlertsList

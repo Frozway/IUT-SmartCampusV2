@@ -27,7 +27,7 @@ const DepartmentList = () => {
 
     return (
         <div className="department-list">
-            <AlertsList departementId={3}/>
+            <AlertsList departmentId={3}/>
 
             {isLoading ? (
                 <div className="flex justify-center items-center h-screen">
