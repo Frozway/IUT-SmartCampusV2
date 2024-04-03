@@ -3,43 +3,24 @@ import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
-import { fetchRoomByTag } from "../services/roomService";
-import { updateRoomState } from "../services/tipsService";
+import { updateTipState } from "../services/tipsService";
 
 const Tip = ({ tipText }) => {
   const { tag } = useParams();
-  const [applied, setApplied] = useState(false);
-
-  useEffect(() => {
-    // Récupérer les données de la salle correspondant au tag
-    fetchRoomByTag(tag)
-      .then((roomData) => {
-        console.log("Données de la salle récupérées avec succès :", roomData);
-        // Vérifier si le bouton a déjà été cliqué
-        if (roomData.tipApplied === true) {
-          setApplied(true);
-        }
-      })
-      .catch((error) => {
-        console.error(
-          "Une erreur est survenue lors de la récupération des données de la salle :",
-          error
-        );
-      });
-  }, [tag]);
+  const [applied, setApplied] = useState(tipText.applied);
 
   const handleAcceptAdvice = () => {
-    // Envoyer une requête à l'API pour mettre à jour l'état dans la base de données (utilisation du service updateRoomState)
-    updateRoomState(tag, 1)
+    // Envoyer une requête à l'API pour mettre à jour l'état dans la base de données
+    updateTipState(tag, tipText.id, true)
       .then(() => {
         console.log(
-          "État de la salle mis à jour avec succès dans la base de données"
+          "État du conseil mis à jour avec succès dans la base de données"
         );
         setApplied(true);
       })
       .catch((error) => {
         console.error(
-          "Une erreur est survenue lors de la mise à jour de l'état de la salle dans la base de données :",
+          "Une erreur est survenue lors de la mise à jour de l'état du conseil dans la base de données :",
           error
         );
       });
@@ -56,7 +37,7 @@ const Tip = ({ tipText }) => {
           icon={applied ? faCheckCircle : faCircleInfo}
           className="size-8 mx-2"
         />
-        <p className="mx-2">{tipText}</p>
+        <p className="mx-2">{tipText.text}</p>
       </div>
       {!applied && (
         <div
@@ -72,7 +53,7 @@ const Tip = ({ tipText }) => {
 };
 
 Tip.propTypes = {
-  tipText: PropTypes.string.isRequired,
+  tip: PropTypes.object.isRequired,
 };
 
 export default Tip;

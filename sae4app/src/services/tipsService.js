@@ -6,9 +6,9 @@ export async function fetchTipsList(id, temp, hum, co2) {
   return tipsList;
 }
 
-export async function updateRoomState(tag, state) {
+export async function updateTipState(tag, tipId, state) {
   const response = await fetch(
-    `http://localhost:8000/api/rooms/${tag}/tips/updateState/${state}`
+    `http://localhost:8000/api/rooms/${tag}/tips/${tipId}/updateState/${state}`
   );
   return response.json();
 }

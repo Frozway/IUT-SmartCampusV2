@@ -117,17 +117,20 @@ class TipsController extends AbstractController
         return $this->json($room->getTips());
     }
 
-    #[Route('/api/rooms/{id}/tips/updateState/{state}', name: 'app_tips_api_update')]
-    public function updateState(int $id, bool $state, ManagerRegistry $doctrine): Response 
+    #[Route('/api/rooms/{id}/tips/{tipId}/updateState/{state}', name: 'app_tips_api_update')]
+    public function updateState(int $id, int $tipId, bool $state, ManagerRegistry $doctrine): Response
     {
         $entityManager = $doctrine->getManager();
-        $roomRepository = $entityManager->getRepository('App\Entity\Room');
-        $room = $roomRepository->find($id);
+        $tipRepository = $entityManager->getRepository(Tips::class);
+        $tip = $tipRepository->find($tipId);
 
-        $room->setTipApplied($state);
+        if (!$tip || $tip->getRoom()->getId() !== $id) {
+            return new Response('Conseil non trouvé', Response::HTTP_NOT_FOUND);
+        }
 
+        $tip->setApplied($state);
         $entityManager->flush();
 
-        return $this->json($room->isTipApplied());
+        return new Response('État du conseil mis à jour avec succès', Response::HTTP_OK);
     }
 }
