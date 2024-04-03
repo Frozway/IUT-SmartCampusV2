@@ -7,8 +7,8 @@ const AppStaff = () => {
   const isLoggedIn = localStorage.getItem("isLoggedIn");
 
   useEffect(() => {
-    document.title = "SmartCampus | Alertes"
-  }, [])
+    document.title = "SmartCampus | Personnel";
+  }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
