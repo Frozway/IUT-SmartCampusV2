@@ -13,26 +13,101 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        // Ajout de nouvelles salles au département Génie Civil
         $departmentGC = new Department();
         $departmentGC->setName("Génie Civil");
         $departmentGC->setNbrooms(0);
         $manager->persist($departmentGC);
 
-        // Room F205
-        $asGC1 = new AcquisitionSystem();
-        $asGC1->setName('ESP-GC001');
-        $asGC1->setIsInstalled(1);
-        $asGC1->setRoom(null);
+        // Ajout de 3 nouvelles salles qui commencent par GC
+        for ($i = 1; $i <= 3; $i++) {
+            $asGC = new AcquisitionSystem();
+            $asGC->setName('ESP-GC0' . $i);
+            $asGC->setIsInstalled(1);
+            $asGC->setRoom(null);
 
-        $roomGC1 = new Room();
-        $roomGC1->setName('F205');
-        $roomGC1->setFloor(2);
-        $roomGC1->setAcquisitionSystem($asGC1);
-        $roomGC1->setDepartment($departmentGC);
-        $manager->persist($roomGC1);
+            $roomGC = new Room();
+            $roomGC->setName('GC0' . $i);
+            $roomGC->setFloor(1);
+            $roomGC->setAcquisitionSystem($asGC);
+            $roomGC->setDepartment($departmentGC);
+            $manager->persist($roomGC);
 
-        $asGC1->setRoom($roomGC1);
-        $manager->persist($asGC1);
+            $asGC->setRoom($roomGC);
+            $manager->persist($asGC);
+        }
+
+        // Ajout du département Réseau et télécommunication
+        $departmentRT = new Department();
+        $departmentRT->setName("Réseau et télécommunication");
+        $departmentRT->setNbrooms(0);
+        $manager->persist($departmentRT);
+
+        // Ajout de 3 nouvelles salles qui commencent par RT
+        for ($i = 1; $i <= 3; $i++) {
+            $asRT = new AcquisitionSystem();
+            $asRT->setName('ESP-RT0' . $i);
+            $asRT->setIsInstalled(1);
+            $asRT->setRoom(null);
+
+            $roomRT = new Room();
+            $roomRT->setName('RT0' . $i);
+            $roomRT->setFloor(1);
+            $roomRT->setAcquisitionSystem($asRT);
+            $roomRT->setDepartment($departmentRT);
+            $manager->persist($roomRT);
+
+            $asRT->setRoom($roomRT);
+            $manager->persist($asRT);
+        }
+
+        // Ajout du bâtiment Techniques de commercialisation
+        $departmentTC = new Department();
+        $departmentTC->setName("Techniques de commercialisation");
+        $departmentTC->setNbrooms(0);
+        $manager->persist($departmentTC);
+
+        // Ajout de 5 nouvelles salles qui commencent par TC
+        for ($i = 1; $i <= 5; $i++) {
+            $asTC = new AcquisitionSystem();
+            $asTC->setName('ESP-TC0' . $i);
+            $asTC->setIsInstalled(1);
+            $asTC->setRoom(null);
+
+            $roomTC = new Room();
+            $roomTC->setName('TC0' . $i);
+            $roomTC->setFloor(1);
+            $roomTC->setAcquisitionSystem($asTC);
+            $roomTC->setDepartment($departmentTC);
+            $manager->persist($roomTC);
+
+            $asTC->setRoom($roomTC);
+            $manager->persist($asTC);
+        }
+
+        // Ajout du bâtiment Génie Biologique
+        $departmentGB = new Department();
+        $departmentGB->setName("Génie Biologique");
+        $departmentGB->setNbrooms(0);
+        $manager->persist($departmentGB);
+
+        // Ajout de 2 nouvelles salles qui commencent par GB
+        for ($i = 1; $i <= 2; $i++) {
+            $asGB = new AcquisitionSystem();
+            $asGB->setName('ESP-GB0' . $i);
+            $asGB->setIsInstalled(1);
+            $asGB->setRoom(null);
+
+            $roomGB = new Room();
+            $roomGB->setName('GB0' . $i);
+            $roomGB->setFloor(1);
+            $roomGB->setAcquisitionSystem($asGB);
+            $roomGB->setDepartment($departmentGB);
+            $manager->persist($roomGB);
+
+            $asGB->setRoom($roomGB);
+            $manager->persist($asGB);
+        }
 
 
 

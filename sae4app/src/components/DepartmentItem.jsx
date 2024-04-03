@@ -13,11 +13,11 @@ const DepartmentItem = (props) => {
 
     return (
         <div 
-            className="p-4 m-2 rounded-lg shadow-lg border-s-blue-dark border-l-8 drop-shadow-md relative"
+            className="p-4 m-2 rounded-lg shadow-lg border-s-green-dark border-l-8 drop-shadow-md relative"
             style={{ cursor: 'pointer' }}
         >
             <div onClick={handleDepartmentClick} className="flex justify-between items-center">
-                <h3 className="mr-4">{props.department.name}</h3>
+                <h3 className="mr-4 font-medium">{props.department.name}</h3>
                 <FontAwesomeIcon icon={showRooms ? faChevronUp : faChevronDown} className="text-blue-dark" />
             </div>
             {showRooms && <RoomList departmentId={props.department.id} roomSearch={props.roomSearch}/>}

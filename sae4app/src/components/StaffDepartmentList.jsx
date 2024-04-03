@@ -1,45 +1,37 @@
 import {useState, useEffect} from 'react';
 import {fetchDepartments} from '../services/departmentService';
 
-import DepartmentItem from './DepartmentItem';
-import SearchBar from './SearchBar';
 import Spinner from './Spinner';
+import AlertsList from './AlertsList';
 
-const DepartmentList = () => {
+const StaffDepartmentList = () => {
     const [departments, setDepartments] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [roomSearch, setRoomSeach] = useState("");
 
     useEffect(() => {
-        document.title = "SmartCampus | Acceuil"
-
         async function fetchDepartmentsData() {
             const departmentsData = await fetchDepartments();
             setDepartments(departmentsData);
             setIsLoading(false);
+            console.log(departmentsData)
         }
 
         fetchDepartmentsData();
     }, []);
 
-    const handleSearch = (value) => {
-        setRoomSeach(value);
-    };
-
     return (
-        <div className="department-list">
+        <>
             {isLoading ? (
                 <div className="flex justify-center items-center h-screen">
                     <Spinner />
                 </div>
             ) : (
                 departments.map((departmentData, index) => (
-                    <DepartmentItem key={index} department={departmentData} roomSearch={roomSearch}/>
+                    <AlertsList departmentId={departmentData.id} departmentName={departmentData.name} key={index}/>
                 ))
             )}
-            <SearchBar onSearch={handleSearch} />
-        </div>
-    );
+        </>
+    )
 }
 
-export default DepartmentList;
+export default StaffDepartmentList

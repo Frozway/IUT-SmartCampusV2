@@ -8,6 +8,7 @@ import Value from "./RoomValue";
 import Tip from "./Tip";
 import {fetchRoomByName, fetchRoomByTag} from '../services/roomService';
 import { fetchTipsList } from "../services/tipsService";
+import Spinner from "./Spinner";
 
 function getComfortIndex(temperature, humidity, co2) {
   // Définition des plages de confort et des pénalités
@@ -113,9 +114,11 @@ const DetailRoom = () => {
   useEffect(() => {
     fetchRoomByTag(tagNumber).then((jsonData) => {
       room = jsonData;
+
+      document.title = `SmartCampus | ${room.name}`
+
       fetchRoomByName(room.dbname)
         .then((jsonData) => {
-          console.log(jsonData);
           setValuesLoading(false);
 
           let roomValues = {
@@ -135,7 +138,7 @@ const DetailRoom = () => {
           );
         })
         .catch((error) => {
-          console.log(`Une erreur est survenue: ${error}`);
+          console.error(error);
           setApiError(true);
           setValuesLoading(false);
         });
@@ -170,9 +173,11 @@ const DetailRoom = () => {
       </p>
 
       {valuesLoading ? (
-        <p className="p-4 rounded shadow-md">Loading...</p>
+        <div className="flex w-full justify-center mb-2">
+          <Spinner />
+        </div>
       ) : apiError ? (
-        <div className="p-4 py-8 my-4 rounded-2xl bg-red-light drop-shadow-md flex items-end text-red-dark text-center">
+        <div className="p-4 py-8 my-4 rounded-2xl bg-red-light strong-shadow flex items-end text-red-dark text-center">
           <p className="w-full">Une erreur est survenue</p>
         </div>
       ) : (
@@ -184,7 +189,7 @@ const DetailRoom = () => {
           ></div>
           <div
             className={
-              "p-4 py-8 my-4 rounded-2xl bg-" +
+              "p-4 py-8 my-4 strong-shadow rounded-2xl bg-" +
               (comfortIndex > 8
                 ? "green-dark"
                 : comfortIndex > 6
@@ -198,7 +203,7 @@ const DetailRoom = () => {
             <span className="text-4xl font-bold">{comfortIndex}</span>
             <span>/10</span>
             {/*  Note supérieur à 8 = confort optimal, note supérieur à 6 = confort acceptable, note supérieur à 4 = confort médiocre sinon confort insuffisant*/}
-            <span className="ml-auto">
+            <span className="ml-auto text-right">
               {comfortIndex > 8
                 ? "CONFORT OPTIMAL"
                 : comfortIndex > 6
@@ -215,15 +220,20 @@ const DetailRoom = () => {
       )}
 
       {tips.length > 1 ? (
-        <div className="flex flex-col items-center w-full">
+        <div className="flex flex-col items-center w-full mb-4">
           <Tip tipText={tips[currentTipIndex]["text"]} />
-          <div>
+          <div className="flex items-center">
             <button
               onClick={prevTip}
               className="bg-gray-300 rounded-full w-8 h-8 inline-flex justify-center items-center focus:outline-none"
             >
               <FontAwesomeIcon icon={faCaretLeft} />
             </button>
+
+            <p className="mx-4 text-center text-gray-dark">
+              {currentTipIndex + 1} / {tips.length}
+            </p>
+
             <button
               onClick={nextTip}
               className="bg-gray-300 rounded-full w-8 h-8 inline-flex justify-center items-center focus:outline-none"
@@ -231,9 +241,7 @@ const DetailRoom = () => {
               <FontAwesomeIcon icon={faCaretRight} />
             </button>
           </div>
-          <p className="mt-3 text-center text-gray-dark">
-            {currentTipIndex + 1} / {tips.length}
-          </p>
+          
         </div>
       ) : tips.length === 1 ? (
         <Tip tipText={tips[currentTipIndex]["text"]} />
@@ -241,7 +249,7 @@ const DetailRoom = () => {
 
       <div
         onClick={() => window.history.back()}
-        className="p-2 my-2 rounded-lg bg-green-dark text-white text-center hover:bg-green-light mt-auto"
+        className="p-2 my-2 strong-shadow mt-4 rounded-lg bg-green-dark text-white text-center hover:bg-green-light mt-auto"
       >
         <FontAwesomeIcon icon={faCaretLeft} />
         Retour

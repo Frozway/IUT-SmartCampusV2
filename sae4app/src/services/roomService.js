@@ -34,6 +34,5 @@ export async function fetchRoomsByDepartment(departmentId) {
     }
   );
   const data = await response.json();
-  console.log(data);
   return data.roomsDetails;
 }

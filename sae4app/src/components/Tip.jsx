@@ -4,7 +4,7 @@ import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 
 const Tip = (props) => {
   return (
-    <div className="bg-blue-light rounded-2xl p-2 my-6 drop-shadow-md text-blue-dark w-full">
+    <div className="bg-blue-light rounded-2xl p-2 mt-6 mb-2 drop-shadow-md text-blue-dark w-full">
       <div className="flex my-2 items-center">
         <FontAwesomeIcon icon={faCircleInfo} className="size-8 mx-2 mb-3" />
         <p className="mx-2">{props.tipText}</p>
