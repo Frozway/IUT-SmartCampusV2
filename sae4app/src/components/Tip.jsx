@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { updateTipState } from "../services/tipsService";
 
 const Tip = ({ tip }) => {
   const { tag } = useParams();
-  const [applied, setApplied] = useState(tip.isApplied);
+  const [isApplied, setIsApplied] = useState(tip.isApplied);
 
   const handleAcceptAdvice = () => {
     // Envoyer une requête à l'API pour mettre à jour l'état dans la base de données
@@ -16,7 +16,7 @@ const Tip = ({ tip }) => {
         console.log(
           "État du conseil mis à jour avec succès dans la base de données"
         );
-        setApplied(true);
+        setIsApplied(true);
       })
       .catch((error) => {
         console.error(
@@ -29,17 +29,17 @@ const Tip = ({ tip }) => {
   return (
     <div
       className={`rounded-2xl p-2 my-6 drop-shadow-md w-full ${
-        applied ? "bg-green-dark text-white" : "bg-blue-light text-blue-dark"
+        isApplied ? "bg-green-dark text-white" : "bg-blue-light text-blue-dark"
       }`}
     >
       <div className="flex my-2 items-center">
         <FontAwesomeIcon
-          icon={applied ? faCheckCircle : faCircleInfo}
+          icon={isApplied ? faCheckCircle : faCircleInfo}
           className="size-8 mx-2"
         />
         <p className="mx-2">{tip.text}</p>
       </div>
-      {!applied && (
+      {!isApplied && (
         <div
           className="bg-blue-dark rounded-lg py-2 px-4 text-white text-center hover:bg-white hover:text-blue-dark cursor-pointer"
           onClick={handleAcceptAdvice}
