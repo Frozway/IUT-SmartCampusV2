@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
 const SearchBar = (props) => {
   const [searchInput, setSearchInput] = useState("");
@@ -28,6 +28,9 @@ const SearchBar = (props) => {
             onChange={handleSearchInputChange}
             className="p-2 border shadow-md rounded-lg focus:outline-none w-full"
           />
+          <button onClick={toggleExpanded} className="ml-2 text-gray-dark">
+            <FontAwesomeIcon icon={faCircleXmark} className="size-7"/>
+          </button>
         </div>
       ) : (
         <div
