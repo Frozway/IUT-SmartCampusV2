@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
+import Spinner from './Spinner';
 
 const AlertsList = (props) => {
     const [alerts, setAlerts] = useState()
@@ -39,7 +40,9 @@ const AlertsList = (props) => {
                     </p>
                 :
                     isLoading ? 
-                        <p>Loading...</p>
+                        <div className="flex justify-center">
+                            <Spinner />
+                        </div>
                     :
                         alerts.length == 0 ?
                             <p className='text-gray-light'>Aucune alerte</p>
