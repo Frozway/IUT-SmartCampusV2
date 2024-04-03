@@ -35,7 +35,6 @@ const AppStaff = () => {
   const handleLogout = () => {
     // Supprimer l'état de connexion du stockage local
     localStorage.removeItem("isLoggedIn");
-    setLoggedIn(false);
   };
 
   if (isLoggedIn) {
