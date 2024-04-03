@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const AppStaff = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
 
   const handleLogin = async (e) => {
-    // Pour éviter le rechargement de la page lors de la soumission du formulaire et donc pour éviter de perdre les données saisies
     e.preventDefault();
-
     try {
       const response = await fetch("http://localhost:8000/api/login", {
         method: "POST",
@@ -20,8 +18,12 @@ const AppStaff = () => {
       });
 
       if (response.ok) {
-        setLoggedIn(true);
+        // Stocker l'état de connexion dans le stockage local
+        localStorage.setItem("isLoggedIn", true);
+        location.reload();
       } else {
+        setUsername("");
+        setPassword("");
         setError("Identifiant ou mot de passe incorrect");
       }
     } catch (error) {
@@ -30,10 +32,18 @@ const AppStaff = () => {
     }
   };
 
-  if (loggedIn) {
+  const handleLogout = () => {
+    // Supprimer l'état de connexion du stockage local
+    localStorage.removeItem("isLoggedIn");
+    setLoggedIn(false);
+  };
+
+  if (isLoggedIn) {
     return (
       <div className="flex justify-center pt-10 text-xl">
-        <h1>Bienvenue sur la page du staff</h1>
+        <div>
+          <h1>Bienvenue sur la page du staff</h1>
+        </div>
       </div>
     );
   } else {
