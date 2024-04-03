@@ -10,7 +10,7 @@ Ce projet vise à développer une application Web pour le Smart Campus de l'IUT 
 
 ## Documentation
 
-Pour des informations détaillées sur le projet, veuillez consulter notre [Wiki](https://forge.iut-larochelle.fr/2023-2024-but-info2-a-sae34/k1/k13/smartcampus/-/wikis/home).
+Pour des informations détaillées sur le projet, veuillez consulter notre [Wiki](https://forge.iut-larochelle.fr/2023-2024-but-info2-a-sae34/k1/k13/smartcampuss4/-/wikis/home).
 
 ## 1. Stratégie de gestion des Branches et des commits
 
@@ -38,7 +38,7 @@ main
 
 Il est important que les messages de commit soient explicites et que des conventions soient respectées par l'équipe : **`<type>(<portée>): <sujet>`**
 
-Pour plus de détails sur nos stratégies au sein du projet, consultez la [page dédiée de notre guide au sein de notre projet](https://forge.iut-larochelle.fr/2023-2024-but-info2-a-sae34/k1/k13/smartcampus/-/wikis/Guide%20d'utilisation%20de%20Git) sur notre [Wiki](https://forge.iut-larochelle.fr/2023-2024-but-info2-a-sae34/k1/k13/smartcampus/-/wikis/home).
+Pour plus de détails sur nos stratégies au sein du projet, consultez la [page dédiée de notre guide au sein de notre projet](https://forge.iut-larochelle.fr/2023-2024-but-info2-a-sae34/k1/k13/smartcampuss4/-/wikis/Guide%20d'utilisation%20de%20Git) sur notre [Wiki](https://forge.iut-larochelle.fr/2023-2024-but-info2-a-sae34/k1/k13/smartcampuss4/-/wikis/home).
 
 ## 3. Comment faire fonctionner la stack ?
 
