@@ -9,10 +9,7 @@ export async function fetchTipsList(id, temp, hum, co2) {
 export async function updateTipState(tag, tipId, state) {
   const response = await fetch(
     `http://localhost:8000/api/rooms/${tag}/tips/${tipId}/updateState/${state}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      method: "PUT"
     }
   );
   return response;
