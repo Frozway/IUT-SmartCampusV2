@@ -111,6 +111,9 @@ const DetailRoom = () => {
   useEffect(() => {
     fetchRoomByTag(tagNumber).then((jsonData) => {
       room = jsonData;
+
+      document.title = `SmartCampus | ${room.name}`
+
       fetchRoomByName(room.dbname)
         .then((jsonData) => {
           setValuesLoading(false);

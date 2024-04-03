@@ -12,6 +12,8 @@ const DepartmentList = () => {
     const [roomSearch, setRoomSeach] = useState("");
 
     useEffect(() => {
+        document.title = "SmartCampus | Acceuil"
+
         async function fetchDepartmentsData() {
             const departmentsData = await fetchDepartments();
             setDepartments(departmentsData);

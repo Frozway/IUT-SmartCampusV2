@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const AppStaff = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+  useEffect(() => {
+    document.title = "SmartCampus | Alertes"
+  }, [])
 
   const handleLogin = async (e) => {
     e.preventDefault();
