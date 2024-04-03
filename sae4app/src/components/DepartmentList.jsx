@@ -3,6 +3,7 @@ import {fetchDepartments} from '../services/departmentService';
 
 import DepartmentItem from './DepartmentItem';
 import SearchBar from './SearchBar';
+import AlertsList from './AlertsList';
 import Spinner from './Spinner';
 
 const DepartmentList = () => {
@@ -26,6 +27,8 @@ const DepartmentList = () => {
 
     return (
         <div className="department-list">
+            <AlertsList departmentId={3}/>
+
             {isLoading ? (
                 <div className="flex justify-center items-center h-screen">
                     <Spinner />

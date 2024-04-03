@@ -45,25 +45,25 @@ class AlertsController extends AbstractController
                     switch ($value['nom']) {
                         case 'temp':
                             if ($value['valeur'] < 18 || $value['valeur'] > 26) {
-                                $alerts[$room->getName()] = 'red';
+                                $alerts[$room->getId()] = ['roomName' => $room->getName(), 'alertLevel' => 'red'];
                             } else if ($value['valeur'] < 19 || $value['valeur'] > 24) {
-                                $alerts[$room->getName()] = 'orange';
+                                $alerts[$room->getId()] = ['roomName' => $room->getName(), 'alertLevel' => 'orange'];
                             }
                             break;
                         
                         case 'hum':
                             if ($value['valeur'] < 30 || $value['valeur'] > 70) {
-                                $alerts[$room->getName()] = 'red';
+                                $alerts[$room->getId()] = ['roomName' => $room->getName(), 'alertLevel' => 'red'];
                             } else if ($value['valeur'] < 40 || $value['valeur'] > 60) {
-                                $alerts[$room->getName()] = 'orange';
+                                $alerts[$room->getId()] = ['roomName' => $room->getName(), 'alertLevel' => 'orange'];
                             }
                             break;
     
                         case 'co2':
                             if ($value['valeur'] > 1000) {
-                                $alerts[$room->getName()] = 'red';
+                                $alerts[$room->getId()] = ['roomName' => $room->getName(), 'alertLevel' => 'red'];
                             } else if ($value['valeur'] > 600) {
-                                $alerts[$room->getName()] = 'orange';
+                                $alerts[$room->getId()] = ['roomName' => $room->getName(), 'alertLevel' => 'orange'];
                             }
                             break;
                     }
