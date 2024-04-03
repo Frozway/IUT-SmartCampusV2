@@ -9,13 +9,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class LoginController extends AbstractController
 {
-    #[Route('/login', name: 'app_login')]
-    public function index(): Response
-    {
-        return $this->render('login/index.html.twig', [
-            'controller_name' => 'LoginController',
-        ]);
-    }
 
     #[Route('/api/login', name: 'app_login_api', methods: ['POST'])]
     public function login(Request $request): Response
