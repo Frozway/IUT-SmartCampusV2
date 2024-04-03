@@ -37,7 +37,7 @@ const AlertsList = (props) => {
 }
 
 AlertsList.propTypes = {
-    departementId: PropTypes.number
+    departementId: PropTypes.number.isRequired
 }
 
 export default AlertsList
