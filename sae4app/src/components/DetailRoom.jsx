@@ -56,6 +56,9 @@ function getComfortIndex(temperature, humidity, co2) {
   // Normalisation du ratio
   comfortRatio = Math.max(comfortRatio, 0.0) / 10.0;
 
+  // arrondir le ratio de confort à 1 chiffre après la virgule
+  comfortRatio = Math.round(comfortRatio * 10) / 10;
+
   return comfortRatio;
 }
 
