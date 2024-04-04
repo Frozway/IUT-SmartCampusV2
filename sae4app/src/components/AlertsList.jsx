@@ -25,7 +25,7 @@ const AlertsList = (props) => {
                 setAlerts(data),
                 setIsLoading(false)
             })
-    }, [])
+    }, [props.departmentId])
 
     return (
         <div className="p-4 m-2 rounded-lg shadow-lg border-s-green-dark border-l-8 drop-shadow-md relative">
