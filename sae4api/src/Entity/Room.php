@@ -48,7 +48,7 @@ class Room
     #[Groups(['room:read'])]
     private ?string $dbname = null;
 
-    #[ORM\OneToMany(targetEntity: Tip::class, mappedBy: 'room', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Tip::class, mappedBy: 'room', orphanRemoval: true, cascade: ['persist', 'remove'])]
     private Collection $tips;
 
     public function __construct()

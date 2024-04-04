@@ -29,7 +29,7 @@ const AlertsList = (props) => {
 
     return (
         <div className="p-4 m-2 rounded-lg shadow-lg border-s-green-dark border-l-8 drop-shadow-md relative">
-            <h2 className='font-medium flex' onClick={() => {setIsOpen(!isOpen)}}>
+            <h2 className='font-medium flex cursor-pointer' onClick={() => {setIsOpen(!isOpen)}}>
                 Alertes &#x2022; {props.departmentName}
                 <FontAwesomeIcon icon={isOpen ? faChevronUp : faChevronDown} className='ml-auto text-gray-light' />
             </h2>
