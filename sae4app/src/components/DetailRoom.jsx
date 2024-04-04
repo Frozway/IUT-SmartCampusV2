@@ -192,7 +192,7 @@ const DetailRoom = () => {
         </div>
       ) : apiError ? (
         <div className="p-4 py-8 my-4 rounded-2xl bg-red-light strong-shadow flex items-end text-red-dark text-center">
-          <p className="w-full">Une erreur est survenue</p>
+          <p className="w-full">Aucun SA associé à cette salle</p>
         </div>
       ) : (
         <div>
