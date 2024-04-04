@@ -103,6 +103,7 @@ const DetailRoom = () => {
   const [tips, setTips] = useState([]);
   const [currentTipIndex, setCurrentTipIndex] = useState(0);
   const [comfortIndex, setComfortIndex] = useState(0);
+  const isAppliedClicked = localStorage.getItem("isApplied");
 
   // Convertir le tag en numéro entier
   const tagNumber = parseInt(tag);
@@ -115,7 +116,7 @@ const DetailRoom = () => {
     fetchRoomByTag(tagNumber).then((jsonData) => {
       room = jsonData;
 
-      document.title = `SmartCampus | ${room.name}`
+      document.title = `SmartCampus | ${room.name}`;
 
       fetchRoomByName(room.dbname)
         .then((jsonData) => {
@@ -165,6 +166,19 @@ const DetailRoom = () => {
       prevIndex === 0 ? tips.length - 1 : prevIndex - 1
     );
   };
+
+  //Si isAppliedClicked est vrai, alors on fetchTipsList
+  useEffect(() => {
+    if (isAppliedClicked) {
+      fetchTipsList(tagNumber, values.temp, values.hum, values.co2).then(
+        (tipsList) => {
+          setTips(tipsList);
+          localStorage.removeItem("isApplied");
+        },
+        []
+      );
+    }
+  }, [isAppliedClicked]);
 
   return (
     <div className="py-4 px-2 flex flex-col">
