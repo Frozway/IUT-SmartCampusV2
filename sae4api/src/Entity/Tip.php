@@ -30,15 +30,28 @@ class Tip
     private ?bool $isApplied = null;
 
     #[ORM\ManyToOne(inversedBy: 'tips')]
-    #[ORM\JoinColumn(nullable: false)]
     private ?Room $room = null;
 
-    public function __construct(string $text, \DateTimeInterface $date, bool $isApplied, Room $room)
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $appliedAt = null;
+
+    #[ORM\Column]
+    private ?float $value = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $type = null;
+
+    private ?bool $shouldCheck = false;
+
+    public function __construct(string $text, \DateTimeInterface $date, bool $isApplied, Room $room, string $type, float $value)
     {
         $this->text = $text;
         $this->date = $date;
+        $this->appliedAt = $date;
         $this->isApplied = $isApplied;
         $this->room = $room;
+        $this->type = $type;
+        $this->value = $value;
     }
 
     public function getId(): ?int
@@ -90,6 +103,54 @@ class Tip
     public function setRoom(?Room $room): static
     {
         $this->room = $room;
+
+        return $this;
+    }
+
+    public function getAppliedAt(): ?\DateTimeInterface
+    {
+        return $this->appliedAt;
+    }
+
+    public function setAppliedAt(\DateTimeInterface $appliedAt): static
+    {
+        $this->appliedAt = $appliedAt;
+
+        return $this;
+    }
+
+    public function getValue(): ?float
+    {
+        return $this->value;
+    }
+
+    public function setValue(float $value): static
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): static
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getShouldCheck(): ?bool
+    {
+        return $this->shouldCheck;
+    }
+
+    public function setShouldCheck(bool $shouldCheck): static
+    {
+        $this->shouldCheck = $shouldCheck;
 
         return $this;
     }
