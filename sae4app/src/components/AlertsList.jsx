@@ -36,7 +36,7 @@ const AlertsList = (props) => {
             { isOpen ?
                 hasError ?
                     <p className='px-4 py-2 bg-red-light text-white rounded-lg mt-2 font-medium text-center'>
-                        Aucun SA associé à une salle
+                        Aucun SA associé aux salles de ce département
                     </p>
                 :
                     isLoading ? 
