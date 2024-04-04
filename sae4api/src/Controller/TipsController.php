@@ -23,6 +23,9 @@ class TipsController extends AbstractController
         $roomRepository = $entityManager->getRepository('App\Entity\Room');
         $room = $roomRepository->find($id);
 
+        $response = $httpClient->request('GET', "https://api.openweathermap.org/data/2.5/weather?q=La%20Rochelle&units=metric&appid=bef0f873bd6633be3fbd81bedb9a02be&lang=fr");
+        $externalTemp = $response->toArray()['main']['temp'];
+
         $lastTips = $room->getTips();
         if (!$lastTips->isEmpty()) {
             // pour chaque vérifier que le tip ne date pas de plus de deux heures sinon le supprimer
@@ -64,23 +67,23 @@ class TipsController extends AbstractController
                 }
             }
             // on vérifie si il n'y a pas de nouveaux tip à ajouter (il ne peut pas y avoir de doublons)
-            if ($temp < 18 && $room->getTips()->filter(function ($tip) {
+            if ($temp < 18 && $externalTemp < 18 && $room->getTips()->filter(function ($tip) {
                     return $tip->getType() === 'trop_froid';
                 })->isEmpty()) {
                 $room->addTip(new Tip("Il fait froid, envisagez d'augmenter le chauffage si possible ou couvrez-vous.", $currentDateTime, false, $room, 'trop_froid', $temp));
-            } elseif ($temp < 18 && $room->getTips()->filter(function ($tip) {
+            } elseif ($temp < 18 && $externalTemp > 18 && $room->getTips()->filter(function ($tip) {
                     return $tip->getType() === 'chaud_dehors_froid_dedans';
                 })->isEmpty()) {
                 $room->addTip(new Tip("Il fait plus chaud dehors, ouvrez les fenêtres.", $currentDateTime, false, $room, 'chaud_dehors_froid_dedans', $temp));
-            } elseif ($temp > 26 && $room->getTips()->filter(function ($tip) {
+            } elseif ($temp > 26 && $externalTemp < 18 && $room->getTips()->filter(function ($tip) {
                     return $tip->getType() === 'chaud_dedans_froid_dehors';
                 })->isEmpty()) {
                 $room->addTip(new Tip("Pensez à baisser le chauffage, si déjà fait, ouvrez pendant quelques minutes les fenêtres.", $currentDateTime, false, $room, 'chaud_dedans_froid_dehors', $temp));
-            } elseif ($temp > 26 && $room->getTips()->filter(function ($tip) {
+            } elseif ($temp > 26 && $externalTemp > 26  && $room->getTips()->filter(function ($tip) {
                     return $tip->getType() === 'chaud_dehors_chaud_dedans';
                 })->isEmpty()) {
                 $room->addTip(new Tip("Baissez les volets et faites un courant d'air ou utilisez des ventilateurs.", $currentDateTime, false, $room, 'chaud_dehors_chaud_dedans', $temp));
-            } elseif ($temp > 26 && $room->getTips()->filter(function ($tip) {
+            } elseif ($temp > 26 && ($externalTemp > 18 && $externalTemp < 26) && $room->getTips()->filter(function ($tip) {
                     return $tip->getType() === 'trop_chaud';
                 })->isEmpty()) {
                 $room->addTip(new Tip("Il fait chaud, ouvrez les fenêtres et coupez le chauffage s'il est allumé.", $currentDateTime, false, $room, 'trop_chaud', $temp));
@@ -110,9 +113,6 @@ class TipsController extends AbstractController
 
         // Vider la collection de conseils de la salle
         $room->getTips()->clear();
-
-        $response = $httpClient->request('GET', "https://api.openweathermap.org/data/2.5/weather?q=La%20Rochelle&units=metric&appid=bef0f873bd6633be3fbd81bedb9a02be&lang=fr");
-        $externalTemp = $response->toArray()['main']['temp'];
 
         $tips = array(
             "temperature" => array(
